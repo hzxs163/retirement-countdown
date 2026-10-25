@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">退休倒计时</string>
+    <string name="app_tagline">把余下的工作日，数得明明白白</string>
+    <string name="app_version">v0.1</string>
+
+    <string name="section_settings">设置</string>
+    <string name="label_birthday">出生日期</string>
+    <string name="label_category">退休身份</string>
+    <string name="label_custom_age">自定义退休年龄</string>
+    <string name="value_not_set">未设置</string>
+
+    <string name="section_details">测算明细</string>
+    <string name="label_base_age">法定退休年龄</string>
+    <string name="label_delay">政策延迟</string>
+    <string name="label_retire_date">预计退休日期</string>
+
+    <string name="section_auto">每天自动更新</string>
+    <string name="label_next_alarm">下次自动刷新</string>
+    <string name="label_exact_alarm">精确闹钟</string>
+    <string name="label_battery">省电限制</string>
+    <string name="label_autostart">小米自启动</string>
+    <string name="auto_note">每天 00:01 自动刷新小组件；开机、改时间或重装后会补刷新一次。</string>
+
+    <string name="btn_pin">添加到桌面 / 负一屏</string>
+    <string name="btn_refresh">立即刷新小组件</string>
+    <string name="help_link">负一屏添加说明与常见问题</string>
+
+    <string name="footer_privacy">数据只保存在本机 · 应用没有联网权限</string>
+    <string name="footer_disclaimer">法定退休年龄按 2025 年起施行的渐进式延迟退休政策测算，仅供参考；弹性退休、缴费年限、特殊工种等以社保经办机构核定为准。</string>
+
+    <string name="widget_description">退休倒计时 4×2 小组件，每天自动更新</string>
+</resources>

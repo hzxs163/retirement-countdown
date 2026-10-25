@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="paper">#F6F3ED</color>
+    <color name="card">#FFFFFF</color>
+    <color name="ink">#1B2430</color>
+    <color name="muted">#7A776F</color>
+    <color name="line">#ECE5D9</color>
+
+    <color name="accent">#B44E2C</color>
+    <color name="ok">#2E7D5B</color>
+
+    <color name="hero_start">#15242F</color>
+    <color name="hero_mid">#1C3543</color>
+    <color name="hero_end">#28505E</color>
+    <color name="hero_text">#F5F8FA</color>
+    <color name="hero_sub">#A9BECB</color>
+    <color name="amber">#F1B563</color>
+
+    <color name="icon_background">#15242F</color>
+</resources>

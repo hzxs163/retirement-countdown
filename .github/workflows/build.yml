@@ -1,0 +1,117 @@
+name: build
+
+on:
+  push:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '8.11.1'
+
+      - name: Build and test
+        shell: bash
+        run: |
+          set -o pipefail
+          gradle --no-daemon testDebugUnitTest assembleRelease --stacktrace 2>&1 | tee build.log
+
+      - name: Prepare APK
+        shell: bash
+        run: |
+          set -euo pipefail
+          SRC="app/build/outputs/apk/release/app-release.apk"
+          test -f "$SRC"
+          mkdir -p artifacts
+          if [[ "${GITHUB_REF}" == refs/tags/v* ]]; then
+            VERSION="${GITHUB_REF_NAME#v}"
+            NAME="倒计时APP v${VERSION}.apk"
+          else
+            NAME="倒计时APP v0.1-dev.apk"
+          fi
+          cp "$SRC" "artifacts/$NAME"
+          (cd artifacts && sha256sum "$NAME" > SHA256SUMS.txt)
+          cat "artifacts/SHA256SUMS.txt"
+          echo "APK_NAME=$NAME" >> "$GITHUB_ENV"
+
+      - name: Verify signature
+        if: always()
+        shell: bash
+        run: |
+          APK=$(find artifacts -name '*.apk' -type f 2>/dev/null | head -1)
+          if [ -z "$APK" ]; then
+            echo "no APK to verify"
+            exit 0
+          fi
+          APKSIGNER=$(find "${ANDROID_HOME:-/usr/local/lib/android/sdk}/build-tools" -name apksigner -type f 2>/dev/null | sort -V | tail -1)
+          if [ -n "$APKSIGNER" ]; then
+            "$APKSIGNER" verify --print-certs "$APK" 2>&1 || true
+          else
+            echo "apksigner not found"
+          fi
+
+      - name: Upload APK artifact
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: retirement-countdown-${{ github.run_number }}
+          path: artifacts/
+          if-no-files-found: error
+
+      - name: Publish release
+        if: startsWith(github.ref, 'refs/tags/v')
+        uses: softprops/action-gh-release@v2
+        with:
+          name: "倒计时APP ${{ github.ref_name }}"
+          tag_name: ${{ github.ref_name }}
+          body: |
+            退休倒计时 Android 小组件。
+
+            版本：${{ github.ref_name }}
+            每日 00:01 自动更新；使用固定签名，后续版本可直接覆盖安装。
+            安装：下载 APK，在手机上允许“安装未知应用”后打开安装。
+          files: |
+            artifacts/${{ env.APK_NAME }}
+            artifacts/SHA256SUMS.txt
+          overwrite_files: true
+          fail_on_unmatched_files: true
+
+      - name: Save failure log
+        if: failure()
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -e
+          mkdir -p ci-log
+          if [ -f build.log ]; then
+            cp build.log ci-log/build.log
+          else
+            echo "build.log missing" > ci-log/build.log
+          fi
+          echo "commit=${GITHUB_SHA}" > ci-log/meta.txt
+          echo "run=${GITHUB_RUN_ID}" >> ci-log/meta.txt
+          echo "ref=${GITHUB_REF}" >> ci-log/meta.txt
+          cd ci-log
+          git init -b ci-logs
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add build.log meta.txt
+          git commit -m "ci log ${GITHUB_RUN_ID}"
+          git push --force "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" ci-logs

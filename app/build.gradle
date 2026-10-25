@@ -1,0 +1,46 @@
+plugins {
+    id 'com.android.application'
+}
+
+android {
+    namespace 'com.hzxs163.retirement'
+    compileSdk 35
+
+    defaultConfig {
+        applicationId "com.hzxs163.retirement"
+        minSdk 26
+        targetSdk 34
+        versionCode 1
+        versionName "0.1"
+    }
+
+    signingConfigs {
+        release {
+            storeFile file("../keystore/release.p12")
+            storePassword "retirement2026"
+            keyAlias "retirement"
+            keyPassword "retirement2026"
+            storeType "PKCS12"
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            signingConfig signingConfigs.release
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+
+    lint {
+        abortOnError false
+    }
+}
+
+dependencies {
+    testImplementation 'junit:junit:4.13.2'
+}
