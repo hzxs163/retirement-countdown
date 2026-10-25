@@ -3,7 +3,7 @@
 一个只在本地运行的 Android 退休倒计时小组件。设定生日和退休身份，自动按 2025 年起施行的渐进式延迟退休政策算出退休日；桌面或负一屏卡片每天 00:01 自动刷新。
 
 - 当前版本：**v0.1**
-- 安装包：在 [Releases](https://github.com/hzxs163/retirement-countdown/releases) 下载 `倒计时APP v0.1.apk`
+- 安装包：在 [Releases](https://github.com/hzxs163/retirement-countdown/releases) 下载显示名为 `倒计时APP v0.1.apk` 的资产（实际文件名 `RetirementCountdown-v0.1.apk`，原因见下方）
 - 包名：`com.hzxs163.retirement`
 - 最低系统：Android 8.0（API 26）
 - 没有 `INTERNET` 权限；生日和设置只保存在本机
@@ -73,13 +73,26 @@ py -3 tools/policy_check.py
 - AGP 8.7.3，compileSdk 35，targetSdk 34，minSdk 26
 - `testDebugUnitTest` + `assembleRelease`
 - 推送到 `main`：构建并上传 APK artifact（不发布）
-- 推送 `v*` 标签：构建并发布 Release，资产名为 `倒计时APP v<版本>.apk`
+- 推送 `v*` 标签：构建并发布 Release
+  - 发布页显示名：`倒计时APP v<版本>.apk`
+  - 实际下载文件名：`RetirementCountdown-v<版本>.apk`
 
 本地构建需要 JDK 17 和 Gradle 8.11.1：
 
 ```bash
 gradle testDebugUnitTest assembleRelease
 ```
+
+## 为什么下载文件名不是中文
+
+GitHub Releases 会在服务端清洗资产名：中文字符被移除、空格变成点，即使通过 API 显式传中文名也会被清洗（实测返回 `already_exists`）。这是 GitHub 的平台限制，App 和 workflow 都无法绕过。
+
+因此 v0.1 使用：
+
+- 发布页显示名（asset label）：`倒计时APP v0.1.apk`
+- 实际下载文件名：`RetirementCountdown-v0.1.apk`
+
+如果必须让“下载到本机的文件名”也完全是中文，需要另加一个 GitHub Pages 镜像；当前没有启用。
 
 ## 签名说明
 
