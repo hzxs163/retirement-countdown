@@ -27,7 +27,6 @@ public final class WidgetRenderer {
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget_retirement);
         PendingIntent openApp = openAppIntent(context);
         views.setOnClickPendingIntent(R.id.widget_root, openApp);
-        views.setOnClickPendingIntent(R.id.widget_hint, openApp);
         views.setTextViewText(R.id.widget_updated, "更新于 " + LocalDateTime.now().format(UPDATE_FORMAT));
 
         LocalDate birthday = ProfileStore.getBirthday(context);
@@ -38,8 +37,7 @@ public final class WidgetRenderer {
             views.setTextViewText(R.id.widget_unit, "天");
             views.setTextViewText(R.id.widget_line1, "点一下，设置生日");
             views.setTextViewText(R.id.widget_line2, "自动计算退休日期");
-            views.setViewVisibility(R.id.widget_life, View.GONE);
-            views.setTextViewText(R.id.widget_hint, "去设置 ›");
+            views.setViewVisibility(R.id.life_column, View.GONE);
             views.setContentDescription(R.id.widget_root, "退休倒计时，还没有设置生日。点击打开应用设置。");
             return views;
         }
@@ -82,20 +80,23 @@ public final class WidgetRenderer {
                     + " · " + ageText(result) + "退休";
         }
         views.setTextViewText(R.id.widget_line2, subLine);
-        views.setTextViewText(R.id.widget_hint, "打开设置 ›");
 
         LifeCalculator.Result life = null;
         if (ProfileStore.isLifeOnWidget(context)) {
             life = LifeCalculator.calculate(
                     birthday, ProfileStore.getLifeYearsTenths(context), LocalDate.now());
-            String lifeText = "余生 " + formatNumber(life.daysRemaining) + " 天";
-            if (life.days <= 0) {
-                lifeText = "已到预计生命终点";
+            if (life.days > 0) {
+                views.setTextViewText(R.id.widget_life_label, "余生");
+                views.setTextViewText(R.id.widget_life_days, formatNumber(life.daysRemaining));
+                views.setTextViewText(R.id.widget_life_unit, "天");
+            } else {
+                views.setTextViewText(R.id.widget_life_label, "已过预计终点");
+                views.setTextViewText(R.id.widget_life_days, "");
+                views.setTextViewText(R.id.widget_life_unit, "");
             }
-            views.setTextViewText(R.id.widget_life, lifeText);
-            views.setViewVisibility(R.id.widget_life, View.VISIBLE);
+            views.setViewVisibility(R.id.life_column, View.VISIBLE);
         } else {
-            views.setViewVisibility(R.id.widget_life, View.GONE);
+            views.setViewVisibility(R.id.life_column, View.GONE);
         }
 
         String description;

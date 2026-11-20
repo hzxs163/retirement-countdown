@@ -41,33 +41,84 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="1dp"
         android:gravity="bottom"
         android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/widget_days"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:id="@+id/retire_column"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:fontFamily="sans-serif-condensed"
-            android:includeFontPadding="false"
-            android:maxLines="1"
-            android:text="1,234"
-            android:textColor="@color/hero_text"
-            android:textSize="34sp"
-            android:textStyle="bold" />
+            android:layout_weight="1"
+            android:gravity="bottom"
+            android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/widget_unit"
-            android:layout_width="wrap_content"
+            <TextView
+                android:id="@+id/widget_days"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-condensed"
+                android:includeFontPadding="false"
+                android:maxLines="1"
+                android:text="1,234"
+                android:textColor="@color/hero_text"
+                android:textSize="30sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/widget_unit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="4dp"
+                android:layout_marginBottom="4dp"
+                android:text="天"
+                android:textColor="@color/hero_sub"
+                android:textSize="11sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/life_column"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:layout_marginBottom="5dp"
-            android:text="天"
-            android:textColor="@color/hero_sub"
-            android:textSize="12sp" />
+            android:layout_weight="1"
+            android:gravity="bottom|end"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/widget_life_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="3dp"
+                android:layout_marginBottom="3dp"
+                android:text="余生"
+                android:textColor="@color/amber"
+                android:textSize="10sp" />
+
+            <TextView
+                android:id="@+id/widget_life_days"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-condensed"
+                android:includeFontPadding="false"
+                android:maxLines="1"
+                android:text="12,345"
+                android:textColor="@color/amber"
+                android:textSize="21sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/widget_life_unit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="3dp"
+                android:layout_marginBottom="3dp"
+                android:text="天"
+                android:textColor="@color/amber"
+                android:textSize="10sp" />
+        </LinearLayout>
     </LinearLayout>
 
     <TextView
@@ -92,41 +143,13 @@
         android:textSize="9sp" />
 
     <TextView
-        android:id="@+id/widget_life"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="1dp"
-        android:ellipsize="end"
-        android:maxLines="1"
-        android:text="余生 12,345 天"
-        android:textColor="@color/amber"
-        android:textSize="9sp"
-        android:visibility="gone" />
-
-    <LinearLayout
+        android:id="@+id/widget_updated"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-        android:gravity="center_vertical"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/widget_updated"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:ellipsize="end"
-            android:maxLines="1"
-            android:text="更新于 10月25日 00:01"
-            android:textColor="#7E95A8"
-            android:textSize="8sp" />
-
-        <TextView
-            android:id="@+id/widget_hint"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="点击设置 ›"
-            android:textColor="@color/amber"
-            android:textSize="8sp" />
-    </LinearLayout>
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:text="更新于 10月25日 00:01"
+        android:textColor="#7E95A8"
+        android:textSize="8sp" />
 </LinearLayout>
