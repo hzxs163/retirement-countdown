@@ -70,6 +70,7 @@ public final class WidgetRenderer {
                     "自动计算退休日期 · " + LocalDateTime.now().format(UPDATE_FORMAT) + " 更新");
             views.setViewVisibility(R.id.life_column, View.GONE);
             views.setViewVisibility(R.id.widget_divider, View.GONE);
+            views.setViewVisibility(R.id.widget_life_label, View.GONE);
             views.setContentDescription(R.id.widget_root, "退休倒计时，还没有设置生日。点击打开应用设置。");
             return views;
         }
@@ -141,9 +142,11 @@ public final class WidgetRenderer {
             }
             views.setViewVisibility(R.id.life_column, View.VISIBLE);
             views.setViewVisibility(R.id.widget_divider, View.VISIBLE);
+            views.setViewVisibility(R.id.widget_life_label, View.VISIBLE);
         } else {
             views.setViewVisibility(R.id.life_column, View.GONE);
             views.setViewVisibility(R.id.widget_divider, View.GONE);
+            views.setViewVisibility(R.id.widget_life_label, View.GONE);
         }
 
         String description;
