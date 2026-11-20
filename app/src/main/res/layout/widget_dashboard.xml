@@ -3,14 +3,15 @@
     android:id="@+id/wd_root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/paper"
+    android:background="@drawable/bg_widget_dash"
+    android:clipToPadding="false"
     android:orientation="vertical"
     android:paddingLeft="10dp"
     android:paddingTop="10dp"
     android:paddingRight="10dp"
     android:paddingBottom="8dp">
 
-    <!-- 顶部：今天剩余时分秒 + 出生→终点 -->
+    <!-- 顶部：距退休还有 + 金句（同 4×2 卡片） -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -19,101 +20,146 @@
         android:paddingLeft="14dp"
         android:paddingTop="10dp"
         android:paddingRight="14dp"
-        android:paddingBottom="12dp">
-
-        <TextView
-            android:id="@+id/wd_date"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:maxLines="1"
-            android:text="2026年11月20日 星期五"
-            android:textColor="#93A9B8"
-            android:textSize="12sp"
-            android:gravity="center" />
-
-        <Chronometer
-            android:id="@+id/wd_clock"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
-            android:fontFamily="sans-serif-condensed"
-            android:format="%s"
-            android:gravity="center"
-            android:includeFontPadding="false"
-            android:letterSpacing="0.05"
-            android:textColor="#F5F8FA"
-            android:textSize="38sp"
-            android:textStyle="bold" />
+        android:paddingBottom="10dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="6dp"
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:includeFontPadding="false"
-                    android:text="出生"
-                    android:textColor="#7E95A8"
-                    android:textSize="10sp" />
-
-                <TextView
-                    android:id="@+id/wd_birth"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="1dp"
-                    android:includeFontPadding="false"
-                    android:maxLines="1"
-                    android:text="1982年3月"
-                    android:textColor="#F5F8FA"
-                    android:textSize="12sp"
-                    android:textStyle="bold" />
-            </LinearLayout>
-
-            <ImageView
-                android:id="@+id/wd_track"
+            <TextView
+                android:id="@+id/wd_label"
                 android:layout_width="0dp"
-                android:layout_height="22dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:scaleType="fitXY" />
+                android:ellipsize="end"
+                android:includeFontPadding="false"
+                android:letterSpacing="0.04"
+                android:maxLines="1"
+                android:text="距退休还有"
+                android:textColor="#C9D8E2"
+                android:textSize="12sp" />
 
-            <LinearLayout
+            <TextView
+                android:id="@+id/wd_badge"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="@drawable/bg_widget_badge"
+                android:includeFontPadding="false"
+                android:maxLines="1"
+                android:paddingLeft="7dp"
+                android:paddingTop="2dp"
+                android:paddingRight="7dp"
+                android:paddingBottom="2dp"
+                android:text="男职工"
+                android:textColor="@color/amber"
+                android:textSize="9sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/wd_days"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-condensed"
+                android:includeFontPadding="false"
+                android:maxLines="1"
+                android:text="6,685"
+                android:textColor="@color/hero_text"
+                android:textSize="38sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/wd_unit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_marginLeft="4dp"
+                android:layout_marginBottom="5dp"
+                android:includeFontPadding="false"
+                android:text="天"
+                android:textColor="@color/hero_sub"
+                android:textSize="12sp" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="1"
                 android:gravity="end"
                 android:orientation="vertical">
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:id="@+id/wd_line1"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:includeFontPadding="false"
-                    android:text="终点"
-                    android:textColor="#7E95A8"
-                    android:textSize="10sp" />
-
-                <TextView
-                    android:id="@+id/wd_end"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="1dp"
+                    android:ellipsize="end"
+                    android:gravity="end"
                     android:includeFontPadding="false"
                     android:maxLines="1"
-                    android:text="2047年3月"
-                    android:textColor="#F5F8FA"
-                    android:textSize="12sp"
-                    android:textStyle="bold" />
+                    android:text="预计 2045年3月10日 退休"
+                    android:textColor="#E8EFF4"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/wd_line2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:ellipsize="end"
+                    android:gravity="end"
+                    android:includeFontPadding="false"
+                    android:maxLines="1"
+                    android:text="还需 18 年 3 个月 · 63 岁退休"
+                    android:textColor="#9FB5C5"
+                    android:textSize="10sp" />
             </LinearLayout>
         </LinearLayout>
+
+        <ViewFlipper
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:autoStart="true"
+            android:flipInterval="30000">
+
+            <TextView
+                android:id="@+id/wd_quote_1"
+                style="@style/WidgetQuoteDash"
+                android:text="别催了，越催越慢。" />
+
+            <TextView
+                android:id="@+id/wd_quote_2"
+                style="@style/WidgetQuoteDash"
+                android:text="今天能拖到明天，明天再说。" />
+
+            <TextView
+                android:id="@+id/wd_quote_3"
+                style="@style/WidgetQuoteDash"
+                android:text="躺着也是过日子。" />
+
+            <TextView
+                android:id="@+id/wd_quote_4"
+                style="@style/WidgetQuoteDash"
+                android:text="慢慢来，比较快。" />
+
+            <TextView
+                android:id="@+id/wd_quote_5"
+                style="@style/WidgetQuoteDash"
+                android:text="工作是做不完的，命是有限的。" />
+
+            <TextView
+                android:id="@+id/wd_quote_6"
+                style="@style/WidgetQuoteDash"
+                android:text="先睡一觉再说。" />
+        </ViewFlipper>
     </LinearLayout>
 
     <!-- 已度过占比 -->

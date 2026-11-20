@@ -3,24 +3,19 @@ package com.hzxs163.retirement;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.os.SystemClock;
 import android.widget.RemoteViews;
 
 import java.text.NumberFormat;
-import java.time.Duration;
 import java.time.LocalDate;
 import java.time.Period;
-import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 
 /** 整屏仪表盘小组件：文字用真 TextView，圆环/进度条用 Bitmap。 */
 public final class DashboardWidgetRenderer {
 
-    private static final DateTimeFormatter HEAD_FORMAT =
-            DateTimeFormatter.ofPattern("yyyy年M月d日 EEEE", Locale.CHINA);
-    private static final DateTimeFormatter MONTH_FORMAT =
-            DateTimeFormatter.ofPattern("yyyy年M月", Locale.CHINA);
+    private static final DateTimeFormatter RETIRE_FORMAT =
+            DateTimeFormatter.ofPattern("yyyy年M月d日", Locale.CHINA);
 
     private static final int[] RING = {
             R.id.wd_ring_1, R.id.wd_ring_2, R.id.wd_ring_3, R.id.wd_ring_4,
@@ -52,6 +47,10 @@ public final class DashboardWidgetRenderer {
             R.id.wd_pct_9, R.id.wd_pct_10, R.id.wd_pct_11, R.id.wd_pct_12,
             R.id.wd_pct_13,
     };
+    private static final int[] QUOTES = {
+            R.id.wd_quote_1, R.id.wd_quote_2, R.id.wd_quote_3,
+            R.id.wd_quote_4, R.id.wd_quote_5, R.id.wd_quote_6,
+    };
 
     private DashboardWidgetRenderer() {
     }
@@ -59,6 +58,7 @@ public final class DashboardWidgetRenderer {
     public static RemoteViews build(Context context, int widthDp) {
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget_dashboard);
         views.setOnClickPendingIntent(R.id.wd_root, openApp(context));
+        WidgetRenderer.applyQuotes(views, QUOTES);
 
         int width = Math.max(240, Math.min(620, widthDp));
         float density = context.getResources().getDisplayMetrics().density;
@@ -67,9 +67,12 @@ public final class DashboardWidgetRenderer {
 
         LocalDate birthday = ProfileStore.getBirthday(context);
         if (birthday == null) {
-            views.setTextViewText(R.id.wd_date, LocalDate.now().format(HEAD_FORMAT));
-            views.setTextViewText(R.id.wd_birth, "未设置");
-            views.setTextViewText(R.id.wd_end, "—");
+            views.setTextViewText(R.id.wd_label, "退休倒计时");
+            views.setTextViewText(R.id.wd_badge, "未设置");
+            views.setTextViewText(R.id.wd_days, "--");
+            views.setTextViewText(R.id.wd_unit, "天");
+            views.setTextViewText(R.id.wd_line1, "点一下，设置生日");
+            views.setTextViewText(R.id.wd_line2, "自动计算退休日期");
             views.setTextViewText(R.id.wd_used_percent, "--");
             views.setTextViewText(R.id.wd_used_detail, "先设置出生日期");
             views.setTextViewText(R.id.wd_remain_detail, "点卡片打开 App");
@@ -79,23 +82,57 @@ public final class DashboardWidgetRenderer {
                 views.setImageViewBitmap(RING[i],
                         WidgetGraphics.ring(px(density, 28), px(density, 5), 0f, trackColor, trackColor));
             }
-            views.setImageViewBitmap(R.id.wd_track,
-                    WidgetGraphics.bar(px(density, width - 190), px(density, 22), 0f, orange, trackColor, false));
             views.setImageViewBitmap(R.id.wd_bar,
                     WidgetGraphics.bar(px(density, width - 44), px(density, 10), 0f, orange, trackColor, false));
             views.setImageViewBitmap(R.id.wd_donut,
-                    WidgetGraphics.ring(px(density, 88), px(density, 10), 0f, orange, trackColor));
+                    WidgetGraphics.ring(px(density, 84), px(density, 10), 0f, orange, trackColor));
             applyLegend(views);
             return views;
         }
 
+        int category = ProfileStore.getCategory(context);
+        int customAge = ProfileStore.getCustomAge(context);
         LocalDate today = LocalDate.now();
+        RetirementCalculator.Result result =
+                RetirementCalculator.calculate(birthday, category, customAge, today);
+
+        long shownDays = result.retired ? result.daysRetired : result.daysRemaining;
+        views.setTextViewText(R.id.wd_days, group(shownDays));
+        views.setTextViewText(R.id.wd_unit, "天");
+        views.setTextViewText(R.id.wd_badge, WidgetRenderer.categoryBadge(category, customAge));
+
+        String label;
+        if (result.retired) {
+            label = "已经退休";
+        } else if (result.days == 0) {
+            label = "今天退休";
+        } else {
+            label = "距退休还有";
+        }
+        views.setTextViewText(R.id.wd_label, label);
+
+        String dateLine;
+        if (result.days <= 0) {
+            dateLine = "退休日 " + result.retirementDate.format(RETIRE_FORMAT);
+        } else {
+            dateLine = "预计 " + result.retirementDate.format(RETIRE_FORMAT) + " 退休";
+        }
+        views.setTextViewText(R.id.wd_line1, dateLine);
+
+        String subLine;
+        if (result.retired) {
+            subLine = "祝退休生活愉快";
+        } else if (result.days == 0) {
+            subLine = "从今天起，时间归你";
+        } else {
+            subLine = "还需 " + WidgetRenderer.remainingText(result.remaining)
+                    + " · " + WidgetRenderer.ageText(result) + "退休";
+        }
+        views.setTextViewText(R.id.wd_line2, subLine);
+
         int yearsTenths = LifeCalculator.clamp(ProfileStore.getLifeYearsTenths(context));
         LifeStats stats = LifeStats.compute(birthday, yearsTenths, today);
 
-        views.setTextViewText(R.id.wd_date, today.format(HEAD_FORMAT));
-        views.setTextViewText(R.id.wd_birth, birthday.format(MONTH_FORMAT));
-        views.setTextViewText(R.id.wd_end, stats.end.format(MONTH_FORMAT));
         views.setTextViewText(R.id.wd_used_percent,
                 String.format(Locale.CHINA, "%.1f%%", stats.usedRatio * 100f));
         views.setTextViewText(R.id.wd_used_detail,
@@ -103,21 +140,11 @@ public final class DashboardWidgetRenderer {
         views.setTextViewText(R.id.wd_remain_detail,
                 periodText(stats.remainPeriod) + "（" + group(stats.remainDays) + " 天）");
 
-        ZonedDateTime now = ZonedDateTime.now();
-        long toMidnight = Duration.between(now,
-                now.toLocalDate().plusDays(1).atStartOfDay(now.getZone())).toMillis();
-        views.setChronometer(R.id.wd_clock, SystemClock.elapsedRealtime() + Math.max(1000L, toMidnight),
-                "%s", true);
-        views.setChronometerCountDown(R.id.wd_clock, true);
-
-        views.setImageViewBitmap(R.id.wd_track,
-                WidgetGraphics.bar(px(density, width - 190), px(density, 22),
-                        stats.usedRatio, orange, trackColor, true));
         views.setImageViewBitmap(R.id.wd_bar,
                 WidgetGraphics.bar(px(density, width - 44), px(density, 10),
                         stats.usedRatio, orange, trackColor, false));
         views.setImageViewBitmap(R.id.wd_donut,
-                WidgetGraphics.ring(px(density, 88), px(density, 10),
+                WidgetGraphics.ring(px(density, 84), px(density, 10),
                         stats.usedRatio, orange, trackColor));
 
         for (int i = 0; i < RING.length && i < stats.stats.size(); i++) {

@@ -333,9 +333,13 @@ public final class WidgetRenderer {
     }
 
     private static void applyQuotes(RemoteViews views) {
+        applyQuotes(views, QUOTE_VIEWS);
+    }
+
+    public static void applyQuotes(RemoteViews views, int[] quoteViewIds) {
         int offset = LocalDate.now().getDayOfYear() % QUOTES.length;
-        for (int i = 0; i < QUOTE_VIEWS.length; i++) {
-            views.setTextViewText(QUOTE_VIEWS[i], QUOTES[(offset + i) % QUOTES.length]);
+        for (int i = 0; i < quoteViewIds.length; i++) {
+            views.setTextViewText(quoteViewIds[i], QUOTES[(offset + i) % QUOTES.length]);
         }
     }
 
