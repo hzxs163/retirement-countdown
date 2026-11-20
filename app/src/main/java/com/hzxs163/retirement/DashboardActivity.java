@@ -82,7 +82,7 @@ public class DashboardActivity extends Activity {
         dashRingTrack.setShowKnob(false);
         dashRingTrack.setBarHeight(dp(6));
         dashDonut.setRingWidth(dp(11));
-        dashDonut.setColors(getColor(R.color.dash_orange), getColor(R.color.dash_track));
+        dashDonut.setColors(getColor(R.color.dash_orange), getColor(R.color.dash_blue));
         dashTrack.setColors(getColor(R.color.dash_orange), getColor(R.color.dash_track));
         dashRingTrack.setColors(getColor(R.color.dash_orange), getColor(R.color.dash_track));
 
@@ -110,7 +110,7 @@ public class DashboardActivity extends Activity {
                 yearsTenths = LifeCalculator.clamp(tenthsOf(seekBar.getProgress()));
                 ProfileStore.setLifeYearsTenths(DashboardActivity.this, yearsTenths);
                 renderAll();
-                RetirementWidgetProvider.refresh(DashboardActivity.this);
+                Widgets.refreshAll(DashboardActivity.this);
             }
         });
     }
@@ -262,7 +262,7 @@ public class DashboardActivity extends Activity {
                     ProfileStore.setBirthday(this, picked);
                     birthday = picked;
                     renderAll();
-                    RetirementWidgetProvider.refresh(this);
+                    Widgets.refreshAll(this);
                 })
                 .setNegativeButton("取消", null)
                 .show();

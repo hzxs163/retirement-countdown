@@ -58,6 +58,7 @@ public final class DashboardWidgetRenderer {
         int width = Math.max(240, Math.min(620, widthDp));
         float density = context.getResources().getDisplayMetrics().density;
         int orange = context.getColor(R.color.dash_orange);
+        int blue = context.getColor(R.color.dash_blue);
         int trackColor = context.getColor(R.color.dash_track);
 
         LocalDate birthday = ProfileStore.getBirthday(context);
@@ -80,7 +81,7 @@ public final class DashboardWidgetRenderer {
             views.setImageViewBitmap(R.id.wd_bar,
                     WidgetGraphics.bar(px(density, width - 44), px(density, 10), 0f, orange, trackColor, false));
             views.setImageViewBitmap(R.id.wd_donut,
-                    WidgetGraphics.ring(px(density, 74), px(density, 10), 0f, orange, trackColor));
+                    WidgetGraphics.ring(px(density, 88), px(density, 11), 0f, orange, blue));
             applyLegend(views);
             return views;
         }
@@ -139,8 +140,8 @@ public final class DashboardWidgetRenderer {
                 WidgetGraphics.bar(px(density, width - 44), px(density, 10),
                         stats.usedRatio, orange, trackColor, false));
         views.setImageViewBitmap(R.id.wd_donut,
-                WidgetGraphics.ring(px(density, 74), px(density, 10),
-                        stats.usedRatio, orange, trackColor));
+                WidgetGraphics.ring(px(density, 88), px(density, 11),
+                        stats.usedRatio, orange, blue));
 
         for (int i = 0; i < RING.length && i < stats.stats.size(); i++) {
             LifeStats.Stat stat = stats.stats.get(i);
