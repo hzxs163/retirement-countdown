@@ -341,40 +341,66 @@
                         android:textSize="14sp" />
                 </FrameLayout>
 
-                <TextView
-                    android:id="@+id/wd_value_1"
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
-                    android:fontFamily="sans-serif-condensed"
-                    android:includeFontPadding="false"
-                    android:maxLines="1"
-                    android:text="2.2万"
-                    android:textColor="@color/ink"
-                    android:textSize="14sp"
-                    android:textStyle="bold" />
+                    android:gravity="bottom"
+                    android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/wd_label_1"
+                    <TextView
+                        android:id="@+id/wd_value_1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-condensed"
+                        android:includeFontPadding="false"
+                        android:maxLines="1"
+                        android:text="2.2万"
+                        android:textColor="@color/ink"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/wd_unit_1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="1dp"
+                        android:layout_marginBottom="1dp"
+                        android:includeFontPadding="false"
+                        android:maxLines="1"
+                        android:text="次"
+                        android:textColor="@color/dash_muted"
+                        android:textSize="10sp" />
+                </LinearLayout>
+
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="1dp"
-                    android:includeFontPadding="false"
-                    android:maxLines="1"
-                    android:text="吃饭"
-                    android:textColor="@color/dash_muted"
-                    android:textSize="10sp" />
+                    android:layout_marginTop="2dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/wd_pct_1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="1dp"
-                    android:includeFontPadding="false"
-                    android:maxLines="1"
-                    android:text="31%"
-                    android:textColor="@color/dash_blue"
-                    android:textSize="10sp" />
+                    <TextView
+                        android:id="@+id/wd_label_1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:includeFontPadding="false"
+                        android:maxLines="1"
+                        android:text="吃饭"
+                        android:textColor="@color/dash_muted"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/wd_pct_1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:includeFontPadding="false"
+                        android:maxLines="1"
+                        android:text="31%"
+                        android:textColor="@color/dash_blue"
+                        android:textSize="12sp" />
+                </LinearLayout>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="0dp"
@@ -408,40 +434,66 @@
                         android:textSize="14sp" />
                 </FrameLayout>
 
-                <TextView
-                    android:id="@+id/wd_value_2"
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
-                    android:fontFamily="sans-serif-condensed"
-                    android:includeFontPadding="false"
-                    android:maxLines="1"
-                    android:text="7415"
-                    android:textColor="@color/ink"
-                    android:textSize="14sp"
-                    android:textStyle="bold" />
+                    android:gravity="bottom"
+                    android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/wd_label_2"
+                    <TextView
+                        android:id="@+id/wd_value_2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-condensed"
+                        android:includeFontPadding="false"
+                        android:maxLines="1"
+                        android:text="7415"
+                        android:textColor="@color/ink"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/wd_unit_2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="1dp"
+                        android:layout_marginBottom="1dp"
+                        android:includeFontPadding="false"
+                        android:maxLines="1"
+                        android:text="次"
+                        android:textColor="@color/dash_muted"
+                        android:textSize="10sp" />
+                </LinearLayout>
+
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="1dp"
-                    android:includeFontPadding="false"
-                    android:maxLines="1"
-                    android:text="睡觉"
-                    android:textColor="@color/dash_muted"
-                    android:textSize="10sp" />
+                    android:layout_marginTop="2dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/wd_pct_2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="1dp"
-                    android:includeFontPadding="false"
-                    android:maxLines="1"
-                    android:text="31%"
-                    android:textColor="@color/dash_blue"
-                    android:textSize="10sp" />
+                    <TextView
+                        android:id="@+id/wd_label_2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:includeFontPadding="false"
+                        android:maxLines="1"
+                        android:text="睡觉"
+                        android:textColor="@color/dash_muted"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/wd_pct_2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:includeFontPadding="false"
+                        android:maxLines="1"
+                        android:text="31%"
+                        android:textColor="@color/dash_blue"
+                        android:textSize="12sp" />
+                </LinearLayout>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="0dp"
@@ -475,40 +527,66 @@
                         android:textSize="14sp" />
                 </FrameLayout>
 
-                <TextView
-                    android:id="@+id/wd_value_3"
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
-                    android:fontFamily="sans-serif-condensed"
-                    android:includeFontPadding="false"
-                    android:maxLines="1"
-                    android:text="7415"
-                    android:textColor="@color/ink"
-                    android:textSize="14sp"
-                    android:textStyle="bold" />
+                    android:gravity="bottom"
+                    android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/wd_label_3"
+                    <TextView
+                        android:id="@+id/wd_value_3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-condensed"
+                        android:includeFontPadding="false"
+                        android:maxLines="1"
+                        android:text="7415"
+                        android:textColor="@color/ink"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/wd_unit_3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="1dp"
+                        android:layout_marginBottom="1dp"
+                        android:includeFontPadding="false"
+                        android:maxLines="1"
+                        android:text="次"
+                        android:textColor="@color/dash_muted"
+                        android:textSize="10sp" />
+                </LinearLayout>
+
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="1dp"
-                    android:includeFontPadding="false"
-                    android:maxLines="1"
-                    android:text="日落"
-                    android:textColor="@color/dash_muted"
-                    android:textSize="10sp" />
+                    android:layout_marginTop="2dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/wd_pct_3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="1dp"
-                    android:includeFontPadding="false"
-                    android:maxLines="1"
-                    android:text="31%"
-                    android:textColor="@color/dash_blue"
-                    android:textSize="10sp" />
+                    <TextView
+                        android:id="@+id/wd_label_3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:includeFontPadding="false"
+                        android:maxLines="1"
+                        android:text="日落"
+                        android:textColor="@color/dash_muted"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/wd_pct_3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:includeFontPadding="false"
+                        android:maxLines="1"
+                        android:text="31%"
+                        android:textColor="@color/dash_blue"
+                        android:textSize="12sp" />
+                </LinearLayout>
             </LinearLayout>
         </LinearLayout>
         <LinearLayout
@@ -548,40 +626,66 @@
                         android:textSize="14sp" />
                 </FrameLayout>
 
-                <TextView
-                    android:id="@+id/wd_value_4"
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
-                    android:fontFamily="sans-serif-condensed"
-                    android:includeFontPadding="false"
-                    android:maxLines="1"
-                    android:text="7.7亿"
-                    android:textColor="@color/ink"
-                    android:textSize="14sp"
-                    android:textStyle="bold" />
+                    android:gravity="bottom"
+                    android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/wd_label_4"
+                    <TextView
+                        android:id="@+id/wd_value_4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-condensed"
+                        android:includeFontPadding="false"
+                        android:maxLines="1"
+                        android:text="7.7亿"
+                        android:textColor="@color/ink"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/wd_unit_4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="1dp"
+                        android:layout_marginBottom="1dp"
+                        android:includeFontPadding="false"
+                        android:maxLines="1"
+                        android:text="次"
+                        android:textColor="@color/dash_muted"
+                        android:textSize="10sp" />
+                </LinearLayout>
+
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="1dp"
-                    android:includeFontPadding="false"
-                    android:maxLines="1"
-                    android:text="心跳"
-                    android:textColor="@color/dash_muted"
-                    android:textSize="10sp" />
+                    android:layout_marginTop="2dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/wd_pct_4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="1dp"
-                    android:includeFontPadding="false"
-                    android:maxLines="1"
-                    android:text="31%"
-                    android:textColor="@color/dash_blue"
-                    android:textSize="10sp" />
+                    <TextView
+                        android:id="@+id/wd_label_4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:includeFontPadding="false"
+                        android:maxLines="1"
+                        android:text="心跳"
+                        android:textColor="@color/dash_muted"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/wd_pct_4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:includeFontPadding="false"
+                        android:maxLines="1"
+                        android:text="31%"
+                        android:textColor="@color/dash_blue"
+                        android:textSize="12sp" />
+                </LinearLayout>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="0dp"
@@ -615,40 +719,66 @@
                         android:textSize="14sp" />
                 </FrameLayout>
 
-                <TextView
-                    android:id="@+id/wd_value_5"
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
-                    android:fontFamily="sans-serif-condensed"
-                    android:includeFontPadding="false"
-                    android:maxLines="1"
-                    android:text="5.9万"
-                    android:textColor="@color/ink"
-                    android:textSize="14sp"
-                    android:textStyle="bold" />
+                    android:gravity="bottom"
+                    android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/wd_label_5"
+                    <TextView
+                        android:id="@+id/wd_value_5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-condensed"
+                        android:includeFontPadding="false"
+                        android:maxLines="1"
+                        android:text="5.9万"
+                        android:textColor="@color/ink"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/wd_unit_5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="1dp"
+                        android:layout_marginBottom="1dp"
+                        android:includeFontPadding="false"
+                        android:maxLines="1"
+                        android:text="次"
+                        android:textColor="@color/dash_muted"
+                        android:textSize="10sp" />
+                </LinearLayout>
+
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="1dp"
-                    android:includeFontPadding="false"
-                    android:maxLines="1"
-                    android:text="上厕所"
-                    android:textColor="@color/dash_muted"
-                    android:textSize="10sp" />
+                    android:layout_marginTop="2dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/wd_pct_5"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="1dp"
-                    android:includeFontPadding="false"
-                    android:maxLines="1"
-                    android:text="31%"
-                    android:textColor="@color/dash_blue"
-                    android:textSize="10sp" />
+                    <TextView
+                        android:id="@+id/wd_label_5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:includeFontPadding="false"
+                        android:maxLines="1"
+                        android:text="上厕所"
+                        android:textColor="@color/dash_muted"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/wd_pct_5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:includeFontPadding="false"
+                        android:maxLines="1"
+                        android:text="31%"
+                        android:textColor="@color/dash_blue"
+                        android:textSize="12sp" />
+                </LinearLayout>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="0dp"
@@ -682,40 +812,66 @@
                         android:textSize="14sp" />
                 </FrameLayout>
 
-                <TextView
-                    android:id="@+id/wd_value_6"
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
-                    android:fontFamily="sans-serif-condensed"
-                    android:includeFontPadding="false"
-                    android:maxLines="1"
-                    android:text="5302"
-                    android:textColor="@color/ink"
-                    android:textSize="14sp"
-                    android:textStyle="bold" />
+                    android:gravity="bottom"
+                    android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/wd_label_6"
+                    <TextView
+                        android:id="@+id/wd_value_6"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-condensed"
+                        android:includeFontPadding="false"
+                        android:maxLines="1"
+                        android:text="5302"
+                        android:textColor="@color/ink"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/wd_unit_6"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="1dp"
+                        android:layout_marginBottom="1dp"
+                        android:includeFontPadding="false"
+                        android:maxLines="1"
+                        android:text="次"
+                        android:textColor="@color/dash_muted"
+                        android:textSize="10sp" />
+                </LinearLayout>
+
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="1dp"
-                    android:includeFontPadding="false"
-                    android:maxLines="1"
-                    android:text="工作日"
-                    android:textColor="@color/dash_muted"
-                    android:textSize="10sp" />
+                    android:layout_marginTop="2dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/wd_pct_6"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="1dp"
-                    android:includeFontPadding="false"
-                    android:maxLines="1"
-                    android:text="31%"
-                    android:textColor="@color/dash_blue"
-                    android:textSize="10sp" />
+                    <TextView
+                        android:id="@+id/wd_label_6"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:includeFontPadding="false"
+                        android:maxLines="1"
+                        android:text="工作日"
+                        android:textColor="@color/dash_muted"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/wd_pct_6"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:includeFontPadding="false"
+                        android:maxLines="1"
+                        android:text="31%"
+                        android:textColor="@color/dash_blue"
+                        android:textSize="12sp" />
+                </LinearLayout>
             </LinearLayout>
         </LinearLayout>
         <LinearLayout
@@ -755,40 +911,66 @@
                         android:textSize="14sp" />
                 </FrameLayout>
 
-                <TextView
-                    android:id="@+id/wd_value_7"
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
-                    android:fontFamily="sans-serif-condensed"
-                    android:includeFontPadding="false"
-                    android:maxLines="1"
-                    android:text="2113"
-                    android:textColor="@color/ink"
-                    android:textSize="14sp"
-                    android:textStyle="bold" />
+                    android:gravity="bottom"
+                    android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/wd_label_7"
+                    <TextView
+                        android:id="@+id/wd_value_7"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-condensed"
+                        android:includeFontPadding="false"
+                        android:maxLines="1"
+                        android:text="2113"
+                        android:textColor="@color/ink"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/wd_unit_7"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="1dp"
+                        android:layout_marginBottom="1dp"
+                        android:includeFontPadding="false"
+                        android:maxLines="1"
+                        android:text="次"
+                        android:textColor="@color/dash_muted"
+                        android:textSize="10sp" />
+                </LinearLayout>
+
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="1dp"
-                    android:includeFontPadding="false"
-                    android:maxLines="1"
-                    android:text="周末"
-                    android:textColor="@color/dash_muted"
-                    android:textSize="10sp" />
+                    android:layout_marginTop="2dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/wd_pct_7"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="1dp"
-                    android:includeFontPadding="false"
-                    android:maxLines="1"
-                    android:text="31%"
-                    android:textColor="@color/dash_blue"
-                    android:textSize="10sp" />
+                    <TextView
+                        android:id="@+id/wd_label_7"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:includeFontPadding="false"
+                        android:maxLines="1"
+                        android:text="周末"
+                        android:textColor="@color/dash_muted"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/wd_pct_7"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:includeFontPadding="false"
+                        android:maxLines="1"
+                        android:text="31%"
+                        android:textColor="@color/dash_blue"
+                        android:textSize="12sp" />
+                </LinearLayout>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="0dp"
@@ -822,40 +1004,66 @@
                         android:textSize="14sp" />
                 </FrameLayout>
 
-                <TextView
-                    android:id="@+id/wd_value_8"
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
-                    android:fontFamily="sans-serif-condensed"
-                    android:includeFontPadding="false"
-                    android:maxLines="1"
-                    android:text="223"
-                    android:textColor="@color/ink"
-                    android:textSize="14sp"
-                    android:textStyle="bold" />
+                    android:gravity="bottom"
+                    android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/wd_label_8"
+                    <TextView
+                        android:id="@+id/wd_value_8"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-condensed"
+                        android:includeFontPadding="false"
+                        android:maxLines="1"
+                        android:text="223"
+                        android:textColor="@color/ink"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/wd_unit_8"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="1dp"
+                        android:layout_marginBottom="1dp"
+                        android:includeFontPadding="false"
+                        android:maxLines="1"
+                        android:text="次"
+                        android:textColor="@color/dash_muted"
+                        android:textSize="10sp" />
+                </LinearLayout>
+
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="1dp"
-                    android:includeFontPadding="false"
-                    android:maxLines="1"
-                    android:text="假期"
-                    android:textColor="@color/dash_muted"
-                    android:textSize="10sp" />
+                    android:layout_marginTop="2dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/wd_pct_8"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="1dp"
-                    android:includeFontPadding="false"
-                    android:maxLines="1"
-                    android:text="31%"
-                    android:textColor="@color/dash_blue"
-                    android:textSize="10sp" />
+                    <TextView
+                        android:id="@+id/wd_label_8"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:includeFontPadding="false"
+                        android:maxLines="1"
+                        android:text="假期"
+                        android:textColor="@color/dash_muted"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/wd_pct_8"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:includeFontPadding="false"
+                        android:maxLines="1"
+                        android:text="31%"
+                        android:textColor="@color/dash_blue"
+                        android:textSize="12sp" />
+                </LinearLayout>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="0dp"
@@ -889,40 +1097,66 @@
                         android:textSize="14sp" />
                 </FrameLayout>
 
-                <TextView
-                    android:id="@+id/wd_value_9"
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
-                    android:fontFamily="sans-serif-condensed"
-                    android:includeFontPadding="false"
-                    android:maxLines="1"
-                    android:text="20"
-                    android:textColor="@color/ink"
-                    android:textSize="14sp"
-                    android:textStyle="bold" />
+                    android:gravity="bottom"
+                    android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/wd_label_9"
+                    <TextView
+                        android:id="@+id/wd_value_9"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-condensed"
+                        android:includeFontPadding="false"
+                        android:maxLines="1"
+                        android:text="20"
+                        android:textColor="@color/ink"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/wd_unit_9"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="1dp"
+                        android:layout_marginBottom="1dp"
+                        android:includeFontPadding="false"
+                        android:maxLines="1"
+                        android:text="次"
+                        android:textColor="@color/dash_muted"
+                        android:textSize="10sp" />
+                </LinearLayout>
+
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="1dp"
-                    android:includeFontPadding="false"
-                    android:maxLines="1"
-                    android:text="春节"
-                    android:textColor="@color/dash_muted"
-                    android:textSize="10sp" />
+                    android:layout_marginTop="2dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/wd_pct_9"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="1dp"
-                    android:includeFontPadding="false"
-                    android:maxLines="1"
-                    android:text="31%"
-                    android:textColor="@color/dash_blue"
-                    android:textSize="10sp" />
+                    <TextView
+                        android:id="@+id/wd_label_9"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:includeFontPadding="false"
+                        android:maxLines="1"
+                        android:text="春节"
+                        android:textColor="@color/dash_muted"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/wd_pct_9"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:includeFontPadding="false"
+                        android:maxLines="1"
+                        android:text="31%"
+                        android:textColor="@color/dash_blue"
+                        android:textSize="12sp" />
+                </LinearLayout>
             </LinearLayout>
         </LinearLayout>
         <LinearLayout
@@ -962,40 +1196,66 @@
                         android:textSize="14sp" />
                 </FrameLayout>
 
-                <TextView
-                    android:id="@+id/wd_value_10"
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
-                    android:fontFamily="sans-serif-condensed"
-                    android:includeFontPadding="false"
-                    android:maxLines="1"
-                    android:text="61"
-                    android:textColor="@color/ink"
-                    android:textSize="14sp"
-                    android:textStyle="bold" />
+                    android:gravity="bottom"
+                    android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/wd_label_10"
+                    <TextView
+                        android:id="@+id/wd_value_10"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-condensed"
+                        android:includeFontPadding="false"
+                        android:maxLines="1"
+                        android:text="61"
+                        android:textColor="@color/ink"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/wd_unit_10"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="1dp"
+                        android:layout_marginBottom="1dp"
+                        android:includeFontPadding="false"
+                        android:maxLines="1"
+                        android:text="次"
+                        android:textColor="@color/dash_muted"
+                        android:textSize="10sp" />
+                </LinearLayout>
+
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="1dp"
-                    android:includeFontPadding="false"
-                    android:maxLines="1"
-                    android:text="夏天"
-                    android:textColor="@color/dash_muted"
-                    android:textSize="10sp" />
+                    android:layout_marginTop="2dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/wd_pct_10"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="1dp"
-                    android:includeFontPadding="false"
-                    android:maxLines="1"
-                    android:text="31%"
-                    android:textColor="@color/dash_blue"
-                    android:textSize="10sp" />
+                    <TextView
+                        android:id="@+id/wd_label_10"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:includeFontPadding="false"
+                        android:maxLines="1"
+                        android:text="夏天"
+                        android:textColor="@color/dash_muted"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/wd_pct_10"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:includeFontPadding="false"
+                        android:maxLines="1"
+                        android:text="31%"
+                        android:textColor="@color/dash_blue"
+                        android:textSize="12sp" />
+                </LinearLayout>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="0dp"
@@ -1029,40 +1289,66 @@
                         android:textSize="14sp" />
                 </FrameLayout>
 
-                <TextView
-                    android:id="@+id/wd_value_11"
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
-                    android:fontFamily="sans-serif-condensed"
-                    android:includeFontPadding="false"
-                    android:maxLines="1"
-                    android:text="20"
-                    android:textColor="@color/ink"
-                    android:textSize="14sp"
-                    android:textStyle="bold" />
+                    android:gravity="bottom"
+                    android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/wd_label_11"
+                    <TextView
+                        android:id="@+id/wd_value_11"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-condensed"
+                        android:includeFontPadding="false"
+                        android:maxLines="1"
+                        android:text="20"
+                        android:textColor="@color/ink"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/wd_unit_11"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="1dp"
+                        android:layout_marginBottom="1dp"
+                        android:includeFontPadding="false"
+                        android:maxLines="1"
+                        android:text="次"
+                        android:textColor="@color/dash_muted"
+                        android:textSize="10sp" />
+                </LinearLayout>
+
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="1dp"
-                    android:includeFontPadding="false"
-                    android:maxLines="1"
-                    android:text="生日"
-                    android:textColor="@color/dash_muted"
-                    android:textSize="10sp" />
+                    android:layout_marginTop="2dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/wd_pct_11"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="1dp"
-                    android:includeFontPadding="false"
-                    android:maxLines="1"
-                    android:text="31%"
-                    android:textColor="@color/dash_blue"
-                    android:textSize="10sp" />
+                    <TextView
+                        android:id="@+id/wd_label_11"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:includeFontPadding="false"
+                        android:maxLines="1"
+                        android:text="生日"
+                        android:textColor="@color/dash_muted"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/wd_pct_11"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:includeFontPadding="false"
+                        android:maxLines="1"
+                        android:text="31%"
+                        android:textColor="@color/dash_blue"
+                        android:textSize="12sp" />
+                </LinearLayout>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="0dp"
@@ -1096,40 +1382,66 @@
                         android:textSize="14sp" />
                 </FrameLayout>
 
-                <TextView
-                    android:id="@+id/wd_value_12"
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
-                    android:fontFamily="sans-serif-condensed"
-                    android:includeFontPadding="false"
-                    android:maxLines="1"
-                    android:text="251"
-                    android:textColor="@color/ink"
-                    android:textSize="14sp"
-                    android:textStyle="bold" />
+                    android:gravity="bottom"
+                    android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/wd_label_12"
+                    <TextView
+                        android:id="@+id/wd_value_12"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-condensed"
+                        android:includeFontPadding="false"
+                        android:maxLines="1"
+                        android:text="251"
+                        android:textColor="@color/ink"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/wd_unit_12"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="1dp"
+                        android:layout_marginBottom="1dp"
+                        android:includeFontPadding="false"
+                        android:maxLines="1"
+                        android:text="次"
+                        android:textColor="@color/dash_muted"
+                        android:textSize="10sp" />
+                </LinearLayout>
+
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="1dp"
-                    android:includeFontPadding="false"
-                    android:maxLines="1"
-                    android:text="满月"
-                    android:textColor="@color/dash_muted"
-                    android:textSize="10sp" />
+                    android:layout_marginTop="2dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/wd_pct_12"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="1dp"
-                    android:includeFontPadding="false"
-                    android:maxLines="1"
-                    android:text="31%"
-                    android:textColor="@color/dash_blue"
-                    android:textSize="10sp" />
+                    <TextView
+                        android:id="@+id/wd_label_12"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:includeFontPadding="false"
+                        android:maxLines="1"
+                        android:text="满月"
+                        android:textColor="@color/dash_muted"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/wd_pct_12"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:includeFontPadding="false"
+                        android:maxLines="1"
+                        android:text="31%"
+                        android:textColor="@color/dash_blue"
+                        android:textSize="12sp" />
+                </LinearLayout>
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
