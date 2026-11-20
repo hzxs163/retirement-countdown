@@ -67,7 +67,7 @@
                 android:letterSpacing="0.05"
                 android:text="17:00:11"
                 android:textColor="#F5F8FA"
-                android:textSize="40sp"
+                android:textSize="38sp"
                 android:textStyle="bold" />
 
             <LinearLayout
@@ -255,8 +255,8 @@
                 android:orientation="horizontal">
 
                 <FrameLayout
-                    android:layout_width="108dp"
-                    android:layout_height="108dp">
+                    android:layout_width="104dp"
+                    android:layout_height="104dp">
 
                     <com.hzxs163.retirement.DonutView
                         android:id="@+id/dash_donut"
