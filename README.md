@@ -2,8 +2,8 @@
 
 一个只在本地运行的 Android 退休倒计时小组件。设定生日和退休身份，自动按 2025 年起施行的渐进式延迟退休政策算出退休日；桌面或负一屏卡片每天 00:01 自动刷新。
 
-- 当前版本：**v0.1**
-- 安装包：在 [Releases](https://github.com/hzxs163/retirement-countdown/releases) 下载显示名为 `倒计时APP v0.1.apk` 的资产（实际文件名 `RetirementCountdown-v0.1.apk`，原因见下方）
+- 当前版本：**v0.2**
+- 安装包：在 [Releases](https://github.com/hzxs163/retirement-countdown/releases) 下载最新版（资产显示名形如 `倒计时APP v0.2.apk`，实际文件名 `RetirementCountdown-v0.2.apk`，原因见下方）
 - 包名：`com.hzxs163.retirement`
 - 最低系统：Android 8.0（API 26）
 - 没有 `INTERNET` 权限；生日和设置只保存在本机
@@ -16,6 +16,7 @@
 - 每天 00:01 自动刷新；开机、修改时间/时区、应用更新后补刷新
 - 应用内一键请求添加小组件；负一屏/主屏两种添加路径都有说明
 - 自动刷新状态可见：精确闹钟、省电限制、下次刷新时间
+- 可选「生命倒计时」：按预期寿命估算剩余天数，默认只在 App 内显示，开关打开后小组件多一行「余生 X 天」
 
 ## 退休年龄口径
 
@@ -47,6 +48,14 @@
 ```bash
 py -3 tools/policy_check.py
 ```
+
+## 生命倒计时口径
+
+- 预期寿命可在设置页调整（30.0–120.0 岁，一位小数），默认 **78.6 岁**（国家卫健委公布的全国人均预期寿命）
+- 换算规则固定可复现：`终点 = 生日 + 整数年 + round(小数 × 12) 个月`，内部按十分之一岁存整数，没有浮点误差
+- 例：1982-03-10 出生、78.6 岁 → 终点 2060-10-10
+- 只做自我提醒，不参与退休日计算；小组件默认不显示，可在设置里打开
+- 边界用例见 `app/src/test/java/com/hzxs163/retirement/LifeCalculatorTest.java`
 
 ## 每天自动更新
 

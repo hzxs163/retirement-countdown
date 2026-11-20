@@ -3,6 +3,7 @@ package com.hzxs163.retirement;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.view.View;
 import android.widget.RemoteViews;
 
 import java.text.NumberFormat;
@@ -37,6 +38,7 @@ public final class WidgetRenderer {
             views.setTextViewText(R.id.widget_unit, "天");
             views.setTextViewText(R.id.widget_line1, "点一下，设置生日");
             views.setTextViewText(R.id.widget_line2, "自动计算退休日期");
+            views.setViewVisibility(R.id.widget_life, View.GONE);
             views.setTextViewText(R.id.widget_hint, "去设置 ›");
             views.setContentDescription(R.id.widget_root, "退休倒计时，还没有设置生日。点击打开应用设置。");
             return views;
@@ -82,6 +84,20 @@ public final class WidgetRenderer {
         views.setTextViewText(R.id.widget_line2, subLine);
         views.setTextViewText(R.id.widget_hint, "打开设置 ›");
 
+        LifeCalculator.Result life = null;
+        if (ProfileStore.isLifeOnWidget(context)) {
+            life = LifeCalculator.calculate(
+                    birthday, ProfileStore.getLifeYearsTenths(context), LocalDate.now());
+            String lifeText = "余生 " + formatNumber(life.daysRemaining) + " 天";
+            if (life.days <= 0) {
+                lifeText = "已到预计生命终点";
+            }
+            views.setTextViewText(R.id.widget_life, lifeText);
+            views.setViewVisibility(R.id.widget_life, View.VISIBLE);
+        } else {
+            views.setViewVisibility(R.id.widget_life, View.GONE);
+        }
+
         String description;
         if (result.retired) {
             description = "退休倒计时，已经退休 " + formatNumber(result.daysRetired)
@@ -89,6 +105,9 @@ public final class WidgetRenderer {
         } else {
             description = "退休倒计时，距离退休还有 " + formatNumber(result.daysRemaining)
                     + " 天，预计 " + result.retirementDate.format(DATE_FORMAT) + " 退休。点击打开设置。";
+        }
+        if (life != null && life.days > 0) {
+            description += "按设定预期寿命，还剩 " + formatNumber(life.daysRemaining) + " 天。";
         }
         views.setContentDescription(R.id.widget_root, description);
         return views;

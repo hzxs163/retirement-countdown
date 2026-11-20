@@ -12,10 +12,13 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.PowerManager;
 import android.provider.Settings;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.NumberPicker;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -45,6 +48,11 @@ public class MainActivity extends Activity {
     private TextView valueNextAlarm;
     private TextView valueExactAlarm;
     private TextView valueBattery;
+    private TextView valueLifeYears;
+    private TextView valueLifeDays;
+    private TextView valueLifeDate;
+    private Switch switchLifeWidget;
+    private boolean bindingSwitch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,6 +85,10 @@ public class MainActivity extends Activity {
         valueNextAlarm = findViewById(R.id.value_next_alarm);
         valueExactAlarm = findViewById(R.id.value_exact_alarm);
         valueBattery = findViewById(R.id.value_battery);
+        valueLifeYears = findViewById(R.id.value_life_years);
+        valueLifeDays = findViewById(R.id.value_life_days);
+        valueLifeDate = findViewById(R.id.value_life_date);
+        switchLifeWidget = findViewById(R.id.switch_life_widget);
     }
 
     private void bindActions() {
@@ -89,6 +101,15 @@ public class MainActivity extends Activity {
         findViewById(R.id.btn_pin).setOnClickListener(v -> pinWidget());
         findViewById(R.id.btn_refresh).setOnClickListener(v -> refreshWidgets());
         findViewById(R.id.tv_help).setOnClickListener(v -> showHelp());
+        findViewById(R.id.row_life_years).setOnClickListener(v -> pickLifeYears());
+        switchLifeWidget.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (bindingSwitch) {
+                return;
+            }
+            ProfileStore.setLifeOnWidget(this, isChecked);
+            RetirementWidgetProvider.refresh(this);
+            toast(isChecked ? "小组件将显示生命倒计时" : "小组件已隐藏生命倒计时");
+        });
     }
 
     private void render() {
@@ -162,6 +183,78 @@ public class MainActivity extends Activity {
                 && powerManager.isIgnoringBatteryOptimizations(getPackageName());
         valueBattery.setText(ignoring ? "无限制" : "可能延迟 · 点此设置");
         valueBattery.setTextColor(getColor(ignoring ? R.color.ok : R.color.accent));
+
+        renderLife();
+    }
+
+    private void renderLife() {
+        int yearsTenths = ProfileStore.getLifeYearsTenths(this);
+        valueLifeYears.setText(LifeCalculator.yearsText(yearsTenths));
+
+        bindingSwitch = true;
+        switchLifeWidget.setChecked(ProfileStore.isLifeOnWidget(this));
+        bindingSwitch = false;
+
+        LocalDate birthday = ProfileStore.getBirthday(this);
+        if (birthday == null) {
+            valueLifeDays.setText("—");
+            valueLifeDate.setText("设置生日后计算");
+            return;
+        }
+
+        LifeCalculator.Result life =
+                LifeCalculator.calculate(birthday, yearsTenths, LocalDate.now());
+        if (life.days > 0) {
+            valueLifeDays.setText(
+                    NumberFormat.getIntegerInstance(Locale.CHINA).format(life.daysRemaining) + " 天");
+            valueLifeDays.setTextColor(getColor(R.color.ink));
+        } else {
+            valueLifeDays.setText("已到预计终点");
+            valueLifeDays.setTextColor(getColor(R.color.accent));
+        }
+        valueLifeDate.setText(life.endDate.format(DATE_FORMAT));
+    }
+
+    private void pickLifeYears() {
+        int current = ProfileStore.getLifeYearsTenths(this);
+
+        NumberPicker whole = new NumberPicker(this);
+        whole.setMinValue(LifeCalculator.MIN_YEARS_TENTHS / 10);
+        whole.setMaxValue(LifeCalculator.MAX_YEARS_TENTHS / 10);
+        whole.setWrapSelectorWheel(false);
+        whole.setValue(current / 10);
+        whole.setFormatter(value -> value + " 岁");
+
+        NumberPicker tenth = new NumberPicker(this);
+        tenth.setMinValue(0);
+        tenth.setMaxValue(9);
+        tenth.setWrapSelectorWheel(false);
+        tenth.setValue(current % 10);
+        tenth.setFormatter(value -> "." + value + " 岁");
+
+        LinearLayout row = new LinearLayout(this);
+        row.setOrientation(LinearLayout.HORIZONTAL);
+        row.setGravity(Gravity.CENTER);
+        row.addView(whole);
+        row.addView(tenth);
+
+        FrameLayout holder = new FrameLayout(this);
+        int horizontalPadding = dp(24);
+        holder.setPadding(horizontalPadding, dp(8), horizontalPadding, 0);
+        holder.addView(row, new FrameLayout.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+
+        new AlertDialog.Builder(this)
+                .setTitle("预期寿命")
+                .setMessage("按出生日期加上这个岁数，作为预计的生命终点日。")
+                .setView(holder)
+                .setPositiveButton("确定", (dialog, which) -> {
+                    ProfileStore.setLifeYearsTenths(this, whole.getValue() * 10 + tenth.getValue());
+                    render();
+                    RetirementWidgetProvider.refresh(this);
+                })
+                .setNegativeButton("取消", null)
+                .show();
     }
 
     private String categoryTitle(int category, int customAge) {

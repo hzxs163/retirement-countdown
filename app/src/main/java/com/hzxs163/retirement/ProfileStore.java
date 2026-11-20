@@ -12,6 +12,8 @@ public final class ProfileStore {
     private static final String KEY_CATEGORY = "category";
     private static final String KEY_CUSTOM_AGE = "custom_age";
     private static final String KEY_NEXT_ALARM = "next_alarm_at";
+    private static final String KEY_LIFE_YEARS_TENTHS = "life_years_tenths";
+    private static final String KEY_LIFE_ON_WIDGET = "life_on_widget";
 
     private ProfileStore() {
     }
@@ -71,5 +73,22 @@ public final class ProfileStore {
 
     public static long getNextAlarmAt(Context context) {
         return prefs(context).getLong(KEY_NEXT_ALARM, 0L);
+    }
+
+    public static int getLifeYearsTenths(Context context) {
+        int value = prefs(context).getInt(KEY_LIFE_YEARS_TENTHS, LifeCalculator.DEFAULT_YEARS_TENTHS);
+        return LifeCalculator.clamp(value);
+    }
+
+    public static void setLifeYearsTenths(Context context, int yearsTenths) {
+        prefs(context).edit().putInt(KEY_LIFE_YEARS_TENTHS, LifeCalculator.clamp(yearsTenths)).apply();
+    }
+
+    public static boolean isLifeOnWidget(Context context) {
+        return prefs(context).getBoolean(KEY_LIFE_ON_WIDGET, false);
+    }
+
+    public static void setLifeOnWidget(Context context, boolean enabled) {
+        prefs(context).edit().putBoolean(KEY_LIFE_ON_WIDGET, enabled).apply();
     }
 }

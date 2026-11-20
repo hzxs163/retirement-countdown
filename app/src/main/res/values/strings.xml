@@ -2,7 +2,7 @@
 <resources>
     <string name="app_name">退休倒计时</string>
     <string name="app_tagline">把余下的工作日，数得明明白白</string>
-    <string name="app_version">v0.1</string>
+    <string name="app_version">v0.2</string>
 
     <string name="section_settings">设置</string>
     <string name="label_birthday">出生日期</string>
@@ -14,6 +14,13 @@
     <string name="label_base_age">法定退休年龄</string>
     <string name="label_delay">政策延迟</string>
     <string name="label_retire_date">预计退休日期</string>
+
+    <string name="section_life">生命倒计时</string>
+    <string name="label_life_years">预期寿命</string>
+    <string name="label_life_widget">显示在小组件</string>
+    <string name="label_life_days">距离终点</string>
+    <string name="label_life_date">预计日期</string>
+    <string name="life_note">按你填写的预期寿命估算（默认 78.6 岁，取自卫健委公布的全国人均预期寿命），仅供自我提醒。</string>
 
     <string name="section_auto">每天自动更新</string>
     <string name="label_next_alarm">下次自动刷新</string>

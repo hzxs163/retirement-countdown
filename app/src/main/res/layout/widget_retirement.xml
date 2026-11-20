@@ -91,6 +91,18 @@
         android:textColor="#9FB5C5"
         android:textSize="9sp" />
 
+    <TextView
+        android:id="@+id/widget_life"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="1dp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:text="余生 12,345 天"
+        android:textColor="@color/amber"
+        android:textSize="9sp"
+        android:visibility="gone" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
