@@ -2,8 +2,8 @@
 
 一个只在本地运行的 Android 退休倒计时小组件。设定生日和退休身份，自动按 2025 年起施行的渐进式延迟退休政策算出退休日；桌面或负一屏卡片每天 00:01 自动刷新。
 
-- 当前版本：**v0.5.2**
-- 安装包：在 [Releases](https://github.com/hzxs163/retirement-countdown/releases) 下载最新版（资产显示名形如 `倒计时APP v0.5.2.apk`，实际文件名 `RetirementCountdown-v0.5.2.apk`，原因见下方）
+- 当前版本：**v0.5.3**
+- 安装包：在 [Releases](https://github.com/hzxs163/retirement-countdown/releases) 下载最新版（资产显示名形如 `倒计时APP v0.5.3.apk`，实际文件名 `RetirementCountdown-v0.5.3.apk`，原因见下方）
 - 包名：`com.hzxs163.retirement`
 - 最低系统：Android 8.0（API 26）
 - 没有 `INTERNET` 权限；生日和设置只保存在本机
