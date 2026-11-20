@@ -356,6 +356,7 @@ public final class WidgetRenderer {
             views.setViewVisibility(R.id.life_column, View.GONE);
             views.setViewVisibility(R.id.widget_divider, View.GONE);
             views.setTextViewText(R.id.widget_life_label, "");
+            views.setTextViewText(R.id.widget_life_prefix, "");
             views.setContentDescription(R.id.widget_root, "退休倒计时，还没有设置生日。点击打开应用设置。");
             return views;
         }
@@ -405,21 +406,23 @@ public final class WidgetRenderer {
                     birthday, ProfileStore.getLifeYearsTenths(context), LocalDate.now());
             if (life.days > 0) {
                 views.setTextViewText(R.id.widget_life_label, "余生还有");
+                views.setTextViewText(R.id.widget_life_prefix, "剩余");
                 views.setTextViewText(R.id.widget_life_days, formatNumber(life.daysRemaining));
                 views.setTextViewText(R.id.widget_life_unit, "天");
                 views.setViewVisibility(R.id.widget_life_chrono, View.VISIBLE);
-                // 秒数交给桌面的 Chronometer 自己走，App 不需要常驻；
-                // 倒计时到「明天 0 点」，也就是天数要减 1 的时刻。
-                long millisToNextDay = Duration.between(
-                        LocalDateTime.now(), LocalDate.now().plusDays(1).atStartOfDay()).toMillis();
-                if (millisToNextDay < 0) {
-                    millisToNextDay = 0;
+                // 秒数交给桌面的 Chronometer 自己走，App 不常驻。
+                // 给的是「剩余总时长」，所以显示的是总小时数 h:mm:ss
+                long totalMillis = Duration.between(
+                        LocalDateTime.now(), life.endDate.atStartOfDay()).toMillis();
+                if (totalMillis < 0) {
+                    totalMillis = 0;
                 }
                 views.setChronometer(R.id.widget_life_chrono,
-                        SystemClock.elapsedRealtime() + millisToNextDay, "%s", true);
+                        SystemClock.elapsedRealtime() + totalMillis, "%s", true);
                 views.setChronometerCountDown(R.id.widget_life_chrono, true);
             } else {
                 views.setTextViewText(R.id.widget_life_label, "已过终点");
+                views.setTextViewText(R.id.widget_life_prefix, "");
                 views.setTextViewText(R.id.widget_life_days, "");
                 views.setTextViewText(R.id.widget_life_unit, "");
                 views.setViewVisibility(R.id.widget_life_chrono, View.GONE);
@@ -430,6 +433,7 @@ public final class WidgetRenderer {
             views.setViewVisibility(R.id.life_column, View.GONE);
             views.setViewVisibility(R.id.widget_divider, View.GONE);
             views.setTextViewText(R.id.widget_life_label, "");
+            views.setTextViewText(R.id.widget_life_prefix, "");
         }
 
         String description;
