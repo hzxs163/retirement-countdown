@@ -19,8 +19,6 @@ public final class WidgetRenderer {
 
     private static final DateTimeFormatter DATE_FORMAT =
             DateTimeFormatter.ofPattern("yyyy年M月d日", Locale.CHINA);
-    private static final DateTimeFormatter UPDATE_FORMAT =
-            DateTimeFormatter.ofPattern("M月d日 HH:mm", Locale.CHINA);
 
     /** 金句：300 条（240 松弛风 + 60 舒服过日子，每 5 条插 1 条暖心），按日期轮换起点 */
     private static final String[] QUOTES = {
@@ -354,8 +352,7 @@ public final class WidgetRenderer {
             views.setTextViewText(R.id.widget_days, "--");
             views.setTextViewText(R.id.widget_unit, "天");
             views.setTextViewText(R.id.widget_line1, "点一下，设置生日");
-            views.setTextViewText(R.id.widget_line2,
-                    "自动计算退休日期 · " + LocalDateTime.now().format(UPDATE_FORMAT) + " 更新");
+            views.setTextViewText(R.id.widget_line2, "自动计算退休日期");
             views.setViewVisibility(R.id.life_column, View.GONE);
             views.setViewVisibility(R.id.widget_divider, View.GONE);
             views.setTextViewText(R.id.widget_life_label, "");
@@ -400,8 +397,7 @@ public final class WidgetRenderer {
             subLine = "还需 " + remainingText(result.remaining)
                     + " · " + ageText(result) + "退休";
         }
-        views.setTextViewText(R.id.widget_line2,
-                subLine + " · " + LocalDateTime.now().format(UPDATE_FORMAT) + " 更新");
+        views.setTextViewText(R.id.widget_line2, subLine);
 
         LifeCalculator.Result life = null;
         if (ProfileStore.isLifeOnWidget(context)) {
