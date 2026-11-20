@@ -3,10 +3,12 @@ package com.hzxs163.retirement;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.os.SystemClock;
 import android.view.View;
 import android.widget.RemoteViews;
 
 import java.text.NumberFormat;
+import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Period;
@@ -38,6 +40,7 @@ public final class WidgetRenderer {
             views.setTextViewText(R.id.widget_line1, "点一下，设置生日");
             views.setTextViewText(R.id.widget_line2, "自动计算退休日期");
             views.setViewVisibility(R.id.life_column, View.GONE);
+            views.setViewVisibility(R.id.widget_divider, View.GONE);
             views.setContentDescription(R.id.widget_root, "退休倒计时，还没有设置生日。点击打开应用设置。");
             return views;
         }
@@ -86,17 +89,31 @@ public final class WidgetRenderer {
             life = LifeCalculator.calculate(
                     birthday, ProfileStore.getLifeYearsTenths(context), LocalDate.now());
             if (life.days > 0) {
-                views.setTextViewText(R.id.widget_life_label, "余生");
+                views.setTextViewText(R.id.widget_life_label, "余生还有");
                 views.setTextViewText(R.id.widget_life_days, formatNumber(life.daysRemaining));
                 views.setTextViewText(R.id.widget_life_unit, "天");
+                views.setViewVisibility(R.id.widget_life_chrono, View.VISIBLE);
+                // 秒数交给桌面的 Chronometer 自己走，App 不需要常驻；
+                // 倒计时到「明天 0 点」，也就是天数要减 1 的时刻。
+                long millisToNextDay = Duration.between(
+                        LocalDateTime.now(), LocalDate.now().plusDays(1).atStartOfDay()).toMillis();
+                if (millisToNextDay < 0) {
+                    millisToNextDay = 0;
+                }
+                views.setChronometer(R.id.widget_life_chrono,
+                        SystemClock.elapsedRealtime() + millisToNextDay, "%s", true);
+                views.setChronometerCountDown(R.id.widget_life_chrono, true);
             } else {
                 views.setTextViewText(R.id.widget_life_label, "已过预计终点");
                 views.setTextViewText(R.id.widget_life_days, "");
                 views.setTextViewText(R.id.widget_life_unit, "");
+                views.setViewVisibility(R.id.widget_life_chrono, View.GONE);
             }
             views.setViewVisibility(R.id.life_column, View.VISIBLE);
+            views.setViewVisibility(R.id.widget_divider, View.VISIBLE);
         } else {
             views.setViewVisibility(R.id.life_column, View.GONE);
+            views.setViewVisibility(R.id.widget_divider, View.GONE);
         }
 
         String description;
