@@ -48,6 +48,7 @@ public class MainActivity extends Activity {
     private TextView valueNextAlarm;
     private TextView valueExactAlarm;
     private TextView valueBattery;
+    private TextView valueDashboard;
     private TextView valueLifeYears;
     private TextView valueLifeDays;
     private TextView valueLifeDate;
@@ -85,6 +86,7 @@ public class MainActivity extends Activity {
         valueNextAlarm = findViewById(R.id.value_next_alarm);
         valueExactAlarm = findViewById(R.id.value_exact_alarm);
         valueBattery = findViewById(R.id.value_battery);
+        valueDashboard = findViewById(R.id.value_dashboard);
         valueLifeYears = findViewById(R.id.value_life_years);
         valueLifeDays = findViewById(R.id.value_life_days);
         valueLifeDate = findViewById(R.id.value_life_date);
@@ -93,6 +95,8 @@ public class MainActivity extends Activity {
 
     private void bindActions() {
         findViewById(R.id.row_birthday).setOnClickListener(v -> pickBirthday());
+        findViewById(R.id.row_dashboard).setOnClickListener(
+                v -> startActivity(new Intent(this, DashboardActivity.class)));
         findViewById(R.id.row_category).setOnClickListener(v -> pickCategory());
         findViewById(R.id.row_custom_age).setOnClickListener(v -> pickCustomAge());
         findViewById(R.id.row_exact_alarm).setOnClickListener(v -> requestExactAlarm());
@@ -116,6 +120,17 @@ public class MainActivity extends Activity {
         LocalDate birthday = ProfileStore.getBirthday(this);
         int category = ProfileStore.getCategory(this);
         int customAge = ProfileStore.getCustomAge(this);
+
+        if (birthday == null) {
+            valueDashboard.setText("已度过占比、还能做多少次");
+        } else {
+            LifeStats lifeStats = LifeStats.compute(
+                    birthday, ProfileStore.getLifeYearsTenths(this), LocalDate.now());
+            valueDashboard.setText(String.format(Locale.CHINA,
+                    "已度过 %.1f%% · 剩余 %s 天",
+                    lifeStats.usedRatio * 100f,
+                    NumberFormat.getIntegerInstance(Locale.CHINA).format(lifeStats.remainDays)));
+        }
 
         valueCategory.setText(categoryTitle(category, customAge));
         valueCustomAge.setText(customAge + " 岁");
