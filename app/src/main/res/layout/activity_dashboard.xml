@@ -370,7 +370,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="6dp"
-            android:columnCount="4"
+            android:columnCount="3"
             android:useDefaultMargins="false" />
 
         <!-- 图例 -->

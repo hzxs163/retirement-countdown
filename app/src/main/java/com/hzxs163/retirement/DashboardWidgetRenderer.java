@@ -21,31 +21,26 @@ public final class DashboardWidgetRenderer {
             R.id.wd_ring_1, R.id.wd_ring_2, R.id.wd_ring_3, R.id.wd_ring_4,
             R.id.wd_ring_5, R.id.wd_ring_6, R.id.wd_ring_7, R.id.wd_ring_8,
             R.id.wd_ring_9, R.id.wd_ring_10, R.id.wd_ring_11, R.id.wd_ring_12,
-            R.id.wd_ring_13,
     };
     private static final int[] EMOJI = {
             R.id.wd_emoji_1, R.id.wd_emoji_2, R.id.wd_emoji_3, R.id.wd_emoji_4,
             R.id.wd_emoji_5, R.id.wd_emoji_6, R.id.wd_emoji_7, R.id.wd_emoji_8,
             R.id.wd_emoji_9, R.id.wd_emoji_10, R.id.wd_emoji_11, R.id.wd_emoji_12,
-            R.id.wd_emoji_13,
     };
     private static final int[] VALUE = {
             R.id.wd_value_1, R.id.wd_value_2, R.id.wd_value_3, R.id.wd_value_4,
             R.id.wd_value_5, R.id.wd_value_6, R.id.wd_value_7, R.id.wd_value_8,
             R.id.wd_value_9, R.id.wd_value_10, R.id.wd_value_11, R.id.wd_value_12,
-            R.id.wd_value_13,
     };
     private static final int[] LABEL = {
             R.id.wd_label_1, R.id.wd_label_2, R.id.wd_label_3, R.id.wd_label_4,
             R.id.wd_label_5, R.id.wd_label_6, R.id.wd_label_7, R.id.wd_label_8,
             R.id.wd_label_9, R.id.wd_label_10, R.id.wd_label_11, R.id.wd_label_12,
-            R.id.wd_label_13,
     };
     private static final int[] PERCENT = {
             R.id.wd_pct_1, R.id.wd_pct_2, R.id.wd_pct_3, R.id.wd_pct_4,
             R.id.wd_pct_5, R.id.wd_pct_6, R.id.wd_pct_7, R.id.wd_pct_8,
             R.id.wd_pct_9, R.id.wd_pct_10, R.id.wd_pct_11, R.id.wd_pct_12,
-            R.id.wd_pct_13,
     };
     private static final int[] QUOTES = {
             R.id.wd_quote_1, R.id.wd_quote_2, R.id.wd_quote_3,
@@ -80,12 +75,12 @@ public final class DashboardWidgetRenderer {
                 views.setTextViewText(VALUE[i], "--");
                 views.setTextViewText(PERCENT[i], "");
                 views.setImageViewBitmap(RING[i],
-                        WidgetGraphics.ring(px(density, 28), px(density, 5), 0f, trackColor, trackColor));
+                        WidgetGraphics.ring(px(density, 38), px(density, 6), 0f, trackColor, trackColor));
             }
             views.setImageViewBitmap(R.id.wd_bar,
                     WidgetGraphics.bar(px(density, width - 44), px(density, 10), 0f, orange, trackColor, false));
             views.setImageViewBitmap(R.id.wd_donut,
-                    WidgetGraphics.ring(px(density, 84), px(density, 10), 0f, orange, trackColor));
+                    WidgetGraphics.ring(px(density, 74), px(density, 10), 0f, orange, trackColor));
             applyLegend(views);
             return views;
         }
@@ -144,7 +139,7 @@ public final class DashboardWidgetRenderer {
                 WidgetGraphics.bar(px(density, width - 44), px(density, 10),
                         stats.usedRatio, orange, trackColor, false));
         views.setImageViewBitmap(R.id.wd_donut,
-                WidgetGraphics.ring(px(density, 84), px(density, 10),
+                WidgetGraphics.ring(px(density, 74), px(density, 10),
                         stats.usedRatio, orange, trackColor));
 
         for (int i = 0; i < RING.length && i < stats.stats.size(); i++) {
@@ -155,7 +150,7 @@ public final class DashboardWidgetRenderer {
             views.setTextViewText(PERCENT[i], stat.percent);
             views.setTextColor(PERCENT[i], stat.color);
             views.setImageViewBitmap(RING[i],
-                    WidgetGraphics.ring(px(density, 28), px(density, 5),
+                    WidgetGraphics.ring(px(density, 38), px(density, 6),
                             stats.remainRatio, stat.color, trackColor));
         }
 

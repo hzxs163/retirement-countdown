@@ -72,7 +72,6 @@ public final class LifeStats {
         add("🌅", "日落", d, pct, COLOR_DAILY);
         add("❤️", "心跳", d * 86400 * 72 / 60.0, pct, COLOR_PHYSIO);
         add("🚽", "上厕所", d * 8, pct, COLOR_PHYSIO);
-        add("💞", "亲密", d / 6.4, pct, COLOR_PHYSIO);
         add("💼", "工作日", d * 261 / 365.0, pct, COLOR_WORK);
         add("🎉", "周末", d * 104 / 365.0, pct, COLOR_WORK);
         add("🗓", "假期", d * 11 / 365.0, pct, COLOR_WORK);
