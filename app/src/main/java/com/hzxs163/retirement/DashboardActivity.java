@@ -2,6 +2,7 @@ package com.hzxs163.retirement;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -46,7 +47,6 @@ public class DashboardActivity extends Activity {
     private TextView dashClock;
     private TextView dashBirth;
     private TextView dashEnd;
-    private TextView dashBirthInline;
     private TextView dashBirthValue;
     private TextView dashLifeLabel;
     private TextView dashLifeValue;
@@ -71,17 +71,17 @@ public class DashboardActivity extends Activity {
 
         birthday = ProfileStore.getBirthday(this);
         if (birthday == null) {
-            Toast.makeText(this, "先在首页设置出生日期", Toast.LENGTH_LONG).show();
-            finish();
+            openSettings();
             return;
         }
 
-        findViewById(R.id.dash_back).setOnClickListener(v -> finish());
+        findViewById(R.id.dash_settings).setOnClickListener(v -> openSettings());
         findViewById(R.id.row_dash_birth).setOnClickListener(v -> pickBirthYearMonth());
 
         dashTrack.setShowKnob(true);
         dashRingTrack.setShowKnob(false);
-        dashRingTrack.setBarHeight(dp(8));
+        dashRingTrack.setBarHeight(dp(6));
+        dashDonut.setRingWidth(dp(11));
         dashDonut.setColors(getColor(R.color.dash_orange), getColor(R.color.dash_track));
         dashTrack.setColors(getColor(R.color.dash_orange), getColor(R.color.dash_track));
         dashRingTrack.setColors(getColor(R.color.dash_orange), getColor(R.color.dash_track));
@@ -118,6 +118,7 @@ public class DashboardActivity extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
+        birthday = ProfileStore.getBirthday(this);
         if (birthday == null) {
             return;
         }
@@ -137,7 +138,6 @@ public class DashboardActivity extends Activity {
         dashClock = findViewById(R.id.dash_clock);
         dashBirth = findViewById(R.id.dash_birth);
         dashEnd = findViewById(R.id.dash_end);
-        dashBirthInline = findViewById(R.id.dash_birth_inline);
         dashBirthValue = findViewById(R.id.dash_birth_value);
         dashLifeLabel = findViewById(R.id.dash_life_label);
         dashLifeValue = findViewById(R.id.dash_life_value);
@@ -151,6 +151,11 @@ public class DashboardActivity extends Activity {
         dashGrid = findViewById(R.id.dash_grid);
     }
 
+    private void openSettings() {
+        startActivity(new Intent(this, MainActivity.class));
+        finish();
+    }
+
     private void renderAll() {
         LocalDate today = LocalDate.now();
         yearsTenths = LifeCalculator.clamp(ProfileStore.getLifeYearsTenths(this));
@@ -159,7 +164,6 @@ public class DashboardActivity extends Activity {
         dashDate.setText(today.format(HEAD_FORMAT));
         dashBirth.setText(birthday.format(MONTH_FORMAT));
         dashEnd.setText(stats.end.format(MONTH_FORMAT));
-        dashBirthInline.setText(birthday.format(MONTH_FORMAT));
         dashBirthValue.setText(birthday.format(MONTH_FORMAT));
         dashLifeLabel.setText("预期寿命：" + LifeCalculator.yearsText(yearsTenths));
         dashLifeValue.setText(formatYears(yearsTenths));
@@ -183,7 +187,7 @@ public class DashboardActivity extends Activity {
     private void fillStats(LifeStats stats) {
         LayoutInflater inflater = LayoutInflater.from(this);
         dashGrid.removeAllViews();
-        int margin = dp(3);
+        int margin = dp(4);
         for (LifeStats.Stat stat : stats.stats) {
             View card = inflater.inflate(R.layout.item_stat, dashGrid, false);
             ((TextView) card.findViewById(R.id.stat_emoji)).setText(stat.emoji);
@@ -195,7 +199,7 @@ public class DashboardActivity extends Activity {
 
             DonutView ring = card.findViewById(R.id.stat_ring);
             ring.setColors(stat.color, getColor(R.color.dash_track));
-            ring.setUsedRatio(stats.usedRatio);
+            ring.setUsedRatio(stats.remainRatio);
 
             GridLayout.LayoutParams params = new GridLayout.LayoutParams();
             params.width = 0;

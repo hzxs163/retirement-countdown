@@ -439,10 +439,10 @@ public final class WidgetRenderer {
         String description;
         if (result.retired) {
             description = "退休倒计时，已经退休 " + formatNumber(result.daysRetired)
-                    + " 天。点击打开设置。";
+                    + " 天。点击打开生命仪表盘。";
         } else {
             description = "退休倒计时，距离退休还有 " + formatNumber(result.daysRemaining)
-                    + " 天，预计 " + result.retirementDate.format(DATE_FORMAT) + " 退休。点击打开设置。";
+                    + " 天，预计 " + result.retirementDate.format(DATE_FORMAT) + " 退休。点击打开生命仪表盘。";
         }
         if (life != null && life.days > 0) {
             description += "按设定预期寿命，还剩 " + formatNumber(life.daysRemaining) + " 天。";
@@ -494,7 +494,7 @@ public final class WidgetRenderer {
     }
 
     private static PendingIntent openAppIntent(Context context) {
-        Intent intent = new Intent(context, MainActivity.class);
+        Intent intent = new Intent(context, DashboardActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
         return PendingIntent.getActivity(
                 context,

@@ -3,16 +3,17 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/bg_dash_card"
+    android:elevation="1dp"
     android:gravity="center_horizontal"
     android:orientation="vertical"
     android:paddingLeft="6dp"
-    android:paddingTop="10dp"
+    android:paddingTop="8dp"
     android:paddingRight="6dp"
-    android:paddingBottom="10dp">
+    android:paddingBottom="8dp">
 
     <FrameLayout
-        android:layout_width="50dp"
-        android:layout_height="50dp">
+        android:layout_width="42dp"
+        android:layout_height="42dp">
 
         <com.hzxs163.retirement.DonutView
             android:id="@+id/stat_ring"
@@ -25,25 +26,26 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="🍜"
-            android:textSize="18sp" />
+            android:textSize="16sp" />
     </FrameLayout>
 
     <TextView
         android:id="@+id/stat_value"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="6dp"
+        android:layout_marginTop="4dp"
         android:fontFamily="sans-serif-condensed"
         android:maxLines="1"
         android:text="9984"
         android:textColor="@color/ink"
-        android:textSize="17sp"
+        android:textSize="14sp"
         android:textStyle="bold" />
 
     <TextView
         android:id="@+id/stat_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="1dp"
         android:maxLines="1"
         android:text="吃饭"
         android:textColor="@color/dash_muted"
