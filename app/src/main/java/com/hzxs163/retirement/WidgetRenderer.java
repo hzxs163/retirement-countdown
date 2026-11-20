@@ -22,14 +22,42 @@ public final class WidgetRenderer {
     private static final DateTimeFormatter UPDATE_FORMAT =
             DateTimeFormatter.ofPattern("M月d日 HH:mm", Locale.CHINA);
 
+    /** 金句：舒服过日子那一类，每次刷新按日期轮换起点 */
+    private static final String[] QUOTES = {
+            "日子是过以后，不是过从前。",
+            "慢慢来，比较快。",
+            "心宽一寸，路宽一丈。",
+            "有茶有饭，便是好日。",
+            "忙时不慌，闲时不废。",
+            "一日三餐，四季安稳。",
+            "少一点计较，多一点坦然。",
+            "不为难自己，是最大的清醒。",
+            "把日子过成自己喜欢的样子。",
+            "饭要趁热吃，觉要按时睡。",
+            "别急，好日子都在路上。",
+            "今天也辛苦了，歇会儿吧。",
+    };
+
+    private static final int[] QUOTE_VIEWS = {
+            R.id.widget_quote_1, R.id.widget_quote_2, R.id.widget_quote_3,
+            R.id.widget_quote_4, R.id.widget_quote_5, R.id.widget_quote_6,
+    };
+
     private WidgetRenderer() {
+    }
+
+    private static void applyQuotes(RemoteViews views) {
+        int offset = LocalDate.now().getDayOfYear() % QUOTES.length;
+        for (int i = 0; i < QUOTE_VIEWS.length; i++) {
+            views.setTextViewText(QUOTE_VIEWS[i], QUOTES[(offset + i) % QUOTES.length]);
+        }
     }
 
     public static RemoteViews build(Context context) {
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget_retirement);
         PendingIntent openApp = openAppIntent(context);
         views.setOnClickPendingIntent(R.id.widget_root, openApp);
-        views.setTextViewText(R.id.widget_updated, "更新于 " + LocalDateTime.now().format(UPDATE_FORMAT));
+        applyQuotes(views);
 
         LocalDate birthday = ProfileStore.getBirthday(context);
         if (birthday == null) {
@@ -38,7 +66,8 @@ public final class WidgetRenderer {
             views.setTextViewText(R.id.widget_days, "--");
             views.setTextViewText(R.id.widget_unit, "天");
             views.setTextViewText(R.id.widget_line1, "点一下，设置生日");
-            views.setTextViewText(R.id.widget_line2, "自动计算退休日期");
+            views.setTextViewText(R.id.widget_line2,
+                    "自动计算退休日期 · " + LocalDateTime.now().format(UPDATE_FORMAT) + " 更新");
             views.setViewVisibility(R.id.life_column, View.GONE);
             views.setViewVisibility(R.id.widget_divider, View.GONE);
             views.setContentDescription(R.id.widget_root, "退休倒计时，还没有设置生日。点击打开应用设置。");
@@ -82,7 +111,8 @@ public final class WidgetRenderer {
             subLine = "还需 " + remainingText(result.remaining)
                     + " · " + ageText(result) + "退休";
         }
-        views.setTextViewText(R.id.widget_line2, subLine);
+        views.setTextViewText(R.id.widget_line2,
+                subLine + " · " + LocalDateTime.now().format(UPDATE_FORMAT) + " 更新");
 
         LifeCalculator.Result life = null;
         if (ProfileStore.isLifeOnWidget(context)) {

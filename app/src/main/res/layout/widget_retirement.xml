@@ -6,9 +6,9 @@
     android:background="@drawable/bg_widget"
     android:orientation="vertical"
     android:paddingLeft="13dp"
-    android:paddingTop="11dp"
+    android:paddingTop="9dp"
     android:paddingRight="13dp"
-    android:paddingBottom="9dp">
+    android:paddingBottom="7dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -67,7 +67,7 @@
                 android:maxLines="1"
                 android:text="1,234"
                 android:textColor="@color/hero_text"
-                android:textSize="30sp"
+                android:textSize="32sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -101,15 +101,6 @@
             android:orientation="vertical"
             android:visibility="gone">
 
-            <TextView
-                android:id="@+id/widget_life_label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:maxLines="1"
-                android:text="余生还有"
-                android:textColor="@color/amber"
-                android:textSize="9sp" />
-
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -125,7 +116,7 @@
                     android:maxLines="1"
                     android:text="12,345"
                     android:textColor="@color/amber"
-                    android:textSize="20sp"
+                    android:textSize="32sp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -133,20 +124,37 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="3dp"
-                    android:layout_marginBottom="2dp"
+                    android:layout_marginBottom="4dp"
                     android:text="天"
                     android:textColor="@color/amber"
-                    android:textSize="9sp" />
+                    android:textSize="11sp" />
             </LinearLayout>
 
-            <Chronometer
-                android:id="@+id/widget_life_chrono"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="1dp"
-                android:format="%s"
-                android:textColor="@color/amber"
-                android:textSize="9sp" />
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/widget_life_label"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:text="余生还有"
+                    android:textColor="@color/amber"
+                    android:textSize="11sp" />
+
+                <Chronometer
+                    android:id="@+id/widget_life_chrono"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:format="%s"
+                    android:textColor="@color/amber"
+                    android:textSize="11sp" />
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 
@@ -172,14 +180,42 @@
         android:textColor="#9FB5C5"
         android:textSize="9sp" />
 
-    <TextView
-        android:id="@+id/widget_updated"
+    <ViewFlipper
+        android:id="@+id/widget_quote"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="3dp"
-        android:ellipsize="end"
-        android:maxLines="1"
-        android:text="更新于 10月25日 00:01"
-        android:textColor="#7E95A8"
-        android:textSize="8sp" />
+        android:autoStart="true"
+        android:flipInterval="30000">
+
+        <TextView
+            android:id="@+id/widget_quote_1"
+            style="@style/WidgetQuote"
+            android:text="日子是过以后，不是过从前。" />
+
+        <TextView
+            android:id="@+id/widget_quote_2"
+            style="@style/WidgetQuote"
+            android:text="慢慢来，比较快。" />
+
+        <TextView
+            android:id="@+id/widget_quote_3"
+            style="@style/WidgetQuote"
+            android:text="心宽一寸，路宽一丈。" />
+
+        <TextView
+            android:id="@+id/widget_quote_4"
+            style="@style/WidgetQuote"
+            android:text="有茶有饭，便是好日。" />
+
+        <TextView
+            android:id="@+id/widget_quote_5"
+            style="@style/WidgetQuote"
+            android:text="忙时不慌，闲时不废。" />
+
+        <TextView
+            android:id="@+id/widget_quote_6"
+            style="@style/WidgetQuote"
+            android:text="一日三餐，四季安稳。" />
+    </ViewFlipper>
 </LinearLayout>
