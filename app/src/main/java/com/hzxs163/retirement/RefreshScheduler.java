@@ -1,7 +1,9 @@
 package com.hzxs163.retirement;
 
 import android.app.AlarmManager;
+import android.appwidget.AppWidgetManager;
 import android.app.PendingIntent;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
@@ -52,6 +54,19 @@ public final class RefreshScheduler {
             } catch (RuntimeException ignored) {
                 ProfileStore.setNextAlarmAt(context, 0L);
             }
+        }
+    }
+
+    public static void sync(Context context) {
+        AppWidgetManager manager = AppWidgetManager.getInstance(context);
+        boolean any = manager.getAppWidgetIds(
+                new ComponentName(context, RetirementWidgetProvider.class)).length > 0
+                || manager.getAppWidgetIds(
+                new ComponentName(context, DashboardWidgetProvider.class)).length > 0;
+        if (any) {
+            scheduleNext(context);
+        } else {
+            cancel(context);
         }
     }
 

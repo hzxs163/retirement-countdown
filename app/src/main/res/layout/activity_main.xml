@@ -601,6 +601,22 @@
             android:textStyle="bold" />
 
         <TextView
+            android:id="@+id/btn_pin_dashboard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/bg_secondary"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center"
+            android:minHeight="48dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:text="@string/btn_pin_dashboard"
+            android:textColor="@color/ink"
+            android:textSize="14sp" />
+
+        <TextView
             android:id="@+id/btn_refresh"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

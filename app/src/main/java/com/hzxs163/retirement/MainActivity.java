@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
+import android.appwidget.AppWidgetProvider;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.net.Uri;
@@ -66,7 +67,7 @@ public class MainActivity extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
-        RetirementWidgetProvider.refresh(this);
+        Widgets.refreshAll(this);
         render();
     }
 
@@ -102,7 +103,9 @@ public class MainActivity extends Activity {
         findViewById(R.id.row_exact_alarm).setOnClickListener(v -> requestExactAlarm());
         findViewById(R.id.row_battery).setOnClickListener(v -> openBatterySettings());
         findViewById(R.id.row_autostart).setOnClickListener(v -> openAutostartSettings());
-        findViewById(R.id.btn_pin).setOnClickListener(v -> pinWidget());
+        findViewById(R.id.btn_pin).setOnClickListener(v -> pinWidget(RetirementWidgetProvider.class));
+        findViewById(R.id.btn_pin_dashboard)
+                .setOnClickListener(v -> pinWidget(DashboardWidgetProvider.class));
         findViewById(R.id.btn_refresh).setOnClickListener(v -> refreshWidgets());
         findViewById(R.id.tv_help).setOnClickListener(v -> showHelp());
         findViewById(R.id.row_life_years).setOnClickListener(v -> pickLifeYears());
@@ -111,7 +114,7 @@ public class MainActivity extends Activity {
                 return;
             }
             ProfileStore.setLifeOnWidget(this, isChecked);
-            RetirementWidgetProvider.refresh(this);
+            Widgets.refreshAll(this);
             toast(isChecked ? "小组件将显示生命倒计时" : "小组件已隐藏生命倒计时");
         });
     }
@@ -266,7 +269,7 @@ public class MainActivity extends Activity {
                 .setPositiveButton("确定", (dialog, which) -> {
                     ProfileStore.setLifeYearsTenths(this, whole.getValue() * 10 + tenth.getValue());
                     render();
-                    RetirementWidgetProvider.refresh(this);
+                    Widgets.refreshAll(this);
                 })
                 .setNegativeButton("取消", null)
                 .show();
@@ -300,7 +303,7 @@ public class MainActivity extends Activity {
             }
             ProfileStore.setBirthday(this, picked);
             render();
-            RetirementWidgetProvider.refresh(this);
+            Widgets.refreshAll(this);
         }, current.getYear(), current.getMonthValue() - 1, current.getDayOfMonth());
 
         Calendar minDate = Calendar.getInstance();
@@ -328,7 +331,7 @@ public class MainActivity extends Activity {
                     } else {
                         ProfileStore.setCategory(this, which);
                         render();
-                        RetirementWidgetProvider.refresh(this);
+                        Widgets.refreshAll(this);
                     }
                 })
                 .setNegativeButton("取消", null)
@@ -356,7 +359,7 @@ public class MainActivity extends Activity {
                     ProfileStore.setCustomAge(this, picker.getValue());
                     ProfileStore.setCategory(this, RetirementCalculator.CATEGORY_CUSTOM);
                     render();
-                    RetirementWidgetProvider.refresh(this);
+                    Widgets.refreshAll(this);
                 })
                 .setNegativeButton("取消", null)
                 .show();
@@ -370,7 +373,7 @@ public class MainActivity extends Activity {
         }
         if (RefreshScheduler.exactAlarmsAllowed(this)) {
             toast("精确闹钟已授权");
-            RetirementWidgetProvider.refresh(this);
+            Widgets.refreshAll(this);
             render();
             return;
         }
@@ -420,13 +423,13 @@ public class MainActivity extends Activity {
         }
     }
 
-    private void pinWidget() {
+    private void pinWidget(Class<? extends AppWidgetProvider> providerClass) {
         AppWidgetManager manager = AppWidgetManager.getInstance(this);
         if (!manager.isRequestPinAppWidgetSupported()) {
             showPinFallback();
             return;
         }
-        ComponentName provider = new ComponentName(this, RetirementWidgetProvider.class);
+        ComponentName provider = new ComponentName(this, providerClass);
         Intent successIntent = new Intent(this, MainActivity.class)
                 .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         PendingIntent success = PendingIntent.getActivity(
@@ -460,7 +463,7 @@ public class MainActivity extends Activity {
     private void refreshWidgets() {
         int count = AppWidgetManager.getInstance(this)
                 .getAppWidgetIds(new ComponentName(this, RetirementWidgetProvider.class)).length;
-        RetirementWidgetProvider.refresh(this);
+        Widgets.refreshAll(this);
         render();
         toast(count == 0 ? "还没有添加小组件" : "小组件已刷新");
     }

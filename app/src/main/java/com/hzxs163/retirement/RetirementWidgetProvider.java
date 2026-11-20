@@ -15,11 +15,7 @@ public class RetirementWidgetProvider extends AppWidgetProvider {
         for (int id : ids) {
             manager.updateAppWidget(id, WidgetRenderer.build(context));
         }
-        if (ids.length > 0) {
-            RefreshScheduler.scheduleNext(context);
-        } else {
-            RefreshScheduler.cancel(context);
-        }
+        RefreshScheduler.sync(context);
     }
 
     @Override
@@ -27,19 +23,17 @@ public class RetirementWidgetProvider extends AppWidgetProvider {
         for (int id : appWidgetIds) {
             appWidgetManager.updateAppWidget(id, WidgetRenderer.build(context));
         }
-        if (appWidgetIds.length > 0) {
-            RefreshScheduler.scheduleNext(context);
-        }
+        RefreshScheduler.sync(context);
     }
 
     @Override
     public void onEnabled(Context context) {
-        RefreshScheduler.scheduleNext(context);
+        RefreshScheduler.sync(context);
     }
 
     @Override
     public void onDisabled(Context context) {
-        RefreshScheduler.cancel(context);
+        RefreshScheduler.sync(context);
     }
 
     @Override
