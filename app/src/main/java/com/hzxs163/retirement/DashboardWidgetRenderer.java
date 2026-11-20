@@ -64,16 +64,12 @@ public final class DashboardWidgetRenderer {
         float density = context.getResources().getDisplayMetrics().density;
         int orange = context.getColor(R.color.dash_orange);
         int trackColor = context.getColor(R.color.dash_track);
-        int accent = context.getColor(R.color.accent);
 
         LocalDate birthday = ProfileStore.getBirthday(context);
         if (birthday == null) {
             views.setTextViewText(R.id.wd_date, LocalDate.now().format(HEAD_FORMAT));
             views.setTextViewText(R.id.wd_birth, "未设置");
             views.setTextViewText(R.id.wd_end, "—");
-            views.setTextViewText(R.id.wd_birth_box, "点一下设置生日");
-            views.setTextViewText(R.id.wd_life_label, "预期寿命：—");
-            views.setTextViewText(R.id.wd_life_value, "--");
             views.setTextViewText(R.id.wd_used_percent, "--");
             views.setTextViewText(R.id.wd_used_detail, "先设置出生日期");
             views.setTextViewText(R.id.wd_remain_detail, "点卡片打开 App");
@@ -81,16 +77,14 @@ public final class DashboardWidgetRenderer {
                 views.setTextViewText(VALUE[i], "--");
                 views.setTextViewText(PERCENT[i], "");
                 views.setImageViewBitmap(RING[i],
-                        WidgetGraphics.ring(px(density, 30), px(density, 5), 0f, trackColor, trackColor));
+                        WidgetGraphics.ring(px(density, 28), px(density, 5), 0f, trackColor, trackColor));
             }
             views.setImageViewBitmap(R.id.wd_track,
                     WidgetGraphics.bar(px(density, width - 190), px(density, 22), 0f, orange, trackColor, false));
             views.setImageViewBitmap(R.id.wd_bar,
                     WidgetGraphics.bar(px(density, width - 44), px(density, 10), 0f, orange, trackColor, false));
             views.setImageViewBitmap(R.id.wd_donut,
-                    WidgetGraphics.ring(px(density, 92), px(density, 10), 0f, orange, trackColor));
-            views.setImageViewBitmap(R.id.wd_life_slider,
-                    WidgetGraphics.bar(px(density, 120), px(density, 18), 0.5f, accent, trackColor, true));
+                    WidgetGraphics.ring(px(density, 88), px(density, 10), 0f, orange, trackColor));
             applyLegend(views);
             return views;
         }
@@ -102,10 +96,6 @@ public final class DashboardWidgetRenderer {
         views.setTextViewText(R.id.wd_date, today.format(HEAD_FORMAT));
         views.setTextViewText(R.id.wd_birth, birthday.format(MONTH_FORMAT));
         views.setTextViewText(R.id.wd_end, stats.end.format(MONTH_FORMAT));
-        views.setTextViewText(R.id.wd_birth_box, birthday.format(MONTH_FORMAT));
-        views.setTextViewText(R.id.wd_life_label, "预期寿命：" + LifeCalculator.yearsText(yearsTenths));
-        views.setTextViewText(R.id.wd_life_value,
-                String.format(Locale.CHINA, "%.1f", yearsTenths / 10.0));
         views.setTextViewText(R.id.wd_used_percent,
                 String.format(Locale.CHINA, "%.1f%%", stats.usedRatio * 100f));
         views.setTextViewText(R.id.wd_used_detail,
@@ -127,14 +117,8 @@ public final class DashboardWidgetRenderer {
                 WidgetGraphics.bar(px(density, width - 44), px(density, 10),
                         stats.usedRatio, orange, trackColor, false));
         views.setImageViewBitmap(R.id.wd_donut,
-                WidgetGraphics.ring(px(density, 92), px(density, 10),
+                WidgetGraphics.ring(px(density, 88), px(density, 10),
                         stats.usedRatio, orange, trackColor));
-
-        float lifeRatio = (yearsTenths - LifeCalculator.MIN_YEARS_TENTHS)
-                / (float) (LifeCalculator.MAX_YEARS_TENTHS - LifeCalculator.MIN_YEARS_TENTHS);
-        views.setImageViewBitmap(R.id.wd_life_slider,
-                WidgetGraphics.bar(px(density, Math.max(70, (width - 54) / 2 - 46)), px(density, 18),
-                        lifeRatio, accent, trackColor, true));
 
         for (int i = 0; i < RING.length && i < stats.stats.size(); i++) {
             LifeStats.Stat stat = stats.stats.get(i);
@@ -144,7 +128,7 @@ public final class DashboardWidgetRenderer {
             views.setTextViewText(PERCENT[i], stat.percent);
             views.setTextColor(PERCENT[i], stat.color);
             views.setImageViewBitmap(RING[i],
-                    WidgetGraphics.ring(px(density, 30), px(density, 5),
+                    WidgetGraphics.ring(px(density, 28), px(density, 5),
                             stats.remainRatio, stat.color, trackColor));
         }
 
