@@ -2,7 +2,7 @@
 <resources>
     <string name="app_name">退休倒计时</string>
     <string name="app_tagline">把余下的工作日，数得明明白白</string>
-    <string name="app_version">v0.6</string>
+    <string name="app_version">v0.6.1</string>
 
     <string name="section_settings">设置</string>
     <string name="label_birthday">出生日期</string>

@@ -176,7 +176,7 @@
         android:maxLines="1"
         android:text="预计 2050年3月12日 退休"
         android:textColor="#E8EFF4"
-        android:textSize="11sp" />
+        android:textSize="12sp" />
 
     <TextView
         android:id="@+id/widget_line2"
@@ -187,15 +187,17 @@
         android:maxLines="1"
         android:text="还需 24 年 3 个月 · 63 岁退休"
         android:textColor="#9FB5C5"
-        android:textSize="9sp" />
+        android:textSize="10sp" />
 
     <ViewFlipper
         android:id="@+id/widget_quote"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="3dp"
+        android:layout_weight="1"
         android:autoStart="true"
-        android:flipInterval="30000">
+        android:flipInterval="30000"
+        android:gravity="center_vertical">
 
         <TextView
             android:id="@+id/widget_quote_1"
